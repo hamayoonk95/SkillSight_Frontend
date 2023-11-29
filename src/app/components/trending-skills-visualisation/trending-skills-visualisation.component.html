@@ -1,0 +1,5 @@
+<p>trending-skills-visualisation works!</p>
+<div *ngIf="skillsData">
+  <canvas baseChart [datasets]="bubbleChartData" [options]="chartOptions" [type]="bubbleChartType">
+  </canvas>
+</div>
