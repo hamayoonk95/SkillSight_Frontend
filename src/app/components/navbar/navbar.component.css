@@ -32,6 +32,10 @@
   overflow: hidden;
 }
 
+.active-link {
+  color: var(--secondary-color);
+}
+
 .menu > li a {
   color: var(--background-color);
   text-decoration: none;

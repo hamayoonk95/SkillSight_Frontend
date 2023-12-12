@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ChartData, ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { SkillsService } from '../../services/skills.service';
 import { CommonModule } from '@angular/common';
@@ -13,38 +13,53 @@ import { CommonModule } from '@angular/common';
 })
 export class TrendingSkillsVisualisationComponent implements OnChanges {
   @Input() selectedRoleId: number | null = null;
-  skillsData: any[] = [];
-  bubbleChartData: ChartDataset<'bubble'>[] = [];
-  chartOptions: ChartOptions = {
+  @Input() category: string | null = null;
+  public barChartData: ChartDataset[] = [{ data: [], label: '' }];
+  public barChartLabels: string[] = []; // Changed to string array
+  public barChartOptions: ChartOptions = {
     responsive: true,
+    indexAxis: 'y',
     scales: {
-      x: {},
-      y: {},
+      x: {
+        display: true,
+        beginAtZero: true,
+      },
+      y: {
+        display: true,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
     },
   };
-  bubbleChartType: ChartType = 'bubble';
 
   constructor(private SkillsService: SkillsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedRoleId'] && this.selectedRoleId) {
+    if (this.category && this.selectedRoleId) {
       this.SkillsService.getSkillsForRole(this.selectedRoleId).subscribe(
         (data) => {
-          this.bubbleChartData = data.map((skill) => ({
-            label: skill.skill.skillName,
-            data: [
-              {
-                x: skill.skill.id,
-                y: skill.frequency,
-                r: Math.sqrt(skill.frequency),
-              },
-            ],
-          }));
+          this.processData(data);
         },
         (error) => {
-          console.error('There was an error retrieving skills data!', error);
+          console.error('Error retrieving skills data:', error);
         }
       );
     }
+  }
+
+  private processData(data: any[]): void {
+    let filteredData = data.filter(
+      (d) =>
+        d.skill.type.typeName.toUpperCase() === this.category?.toUpperCase()
+    );
+
+    filteredData = filteredData
+      .sort((a, b) => b.frequency - a.frequency)
+      .slice(0, 20);
+    this.barChartLabels = filteredData.map((d) => d.skill.skillName);
+    this.barChartData[0].data = filteredData.map((d) => d.frequency);
   }
 }

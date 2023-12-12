@@ -1,5 +1,7 @@
-<p>trending-skills-visualisation works!</p>
-<div *ngIf="skillsData">
-  <canvas baseChart [datasets]="bubbleChartData" [options]="chartOptions" [type]="bubbleChartType">
+<div class="skill-charts" *ngIf="category">
+  <h3 class="category-heading">
+    {{ category }} Skills
+  </h3>
+  <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" chartType="bar">
   </canvas>
 </div>

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SkillsService {
-  private apiUrl = 'http://localhost:5000/api/roles';
+  private apiUrl = `${environment.apiUrl}/api/roles`;
 
   constructor(private http: HttpClient) {}
 
   getSkillsForRole(roleId: number): Observable<any[]> {
-    const url = `http://localhost:5000/api/roles/${roleId}/skills`;
+    const url = `${this.apiUrl}/${roleId}/skills`;
     return this.http.get<any[]>(url);
   }
 }

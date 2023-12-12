@@ -1,6 +1,8 @@
-<select (change)="onRoleChange($event)">
-  <option value="">Select a role</option>
-  <option *ngFor="let role of roles" [value]="role.id">
-    {{ role.roleTitle }}
-  </option>
-</select>
+<div class="select-container">
+  <select (change)="onRoleChange($event)">
+    <option value="">Select a role</option>
+    <option *ngFor="let role of roles" [value]="role.id">
+      {{ role.roleTitle }}
+    </option>
+  </select>
+</div>

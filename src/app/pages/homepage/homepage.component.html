@@ -1,4 +1,18 @@
-<p>homepage works!</p>
-
 <app-role-selection (roleSelected)="selectedRoleId = $event"></app-role-selection>
-<app-trending-skills-visualisation [selectedRoleId]="selectedRoleId"></app-trending-skills-visualisation>
+
+<div *ngIf="selectedRoleId" class="visualisation">
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Language'">
+  </app-trending-skills-visualisation>
+
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Library'">
+  </app-trending-skills-visualisation>
+
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Tool'">
+  </app-trending-skills-visualisation>
+
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Platform'">
+  </app-trending-skills-visualisation>
+
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Methodology'">
+  </app-trending-skills-visualisation>
+</div>

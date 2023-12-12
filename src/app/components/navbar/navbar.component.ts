@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class NavbarComponent {
   navigationLinks = [
-    { label: 'Home', route: '' },
+    { label: 'Dashboard', route: '' },
     { label: 'About', route: 'about' },
     { label: 'Gap Analysis', route: 'skill-gap' },
     { label: 'Role Profiling', route: 'role-profile' },

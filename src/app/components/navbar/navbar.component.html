@@ -6,7 +6,7 @@
     <div class="menu-button"></div>
   </label>
   <ul class="menu">
-    <li *ngFor="let link of navigationLinks" (click)="closeNav()">
+    <li *ngFor="let link of navigationLinks" routerLinkActive="active-link" (click)="closeNav()">
       <a [routerLink]="link.route">
         {{ link.label }}</a>
     </li>
