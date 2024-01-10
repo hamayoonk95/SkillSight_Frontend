@@ -1,5 +1,7 @@
 <app-role-selection (roleSelected)="selectedRoleId = $event"></app-role-selection>
 
+<app-job-info [selectedRoleId]="selectedRoleId"></app-job-info>
+
 <div *ngIf="selectedRoleId" class="visualisation">
   <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Language'">
   </app-trending-skills-visualisation>
