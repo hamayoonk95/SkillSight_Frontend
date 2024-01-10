@@ -1,0 +1,10 @@
+<!-- <p>job-info works!</p> -->
+
+<div *ngIf="jobInfo">
+  <p>Jobs Count:
+    {{ jobInfo.jobPostingsCount }}
+  </p>
+  <p>Cut Off Date:
+    {{ jobInfo.cutOffDate | date }}
+  </p>
+</div>

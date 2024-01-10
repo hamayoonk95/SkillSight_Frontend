@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RolesService } from '../../services/roles.service';
+import { RolesService } from '../../services/job-roles-service/job-roles.service';
 
 @Component({
   selector: 'app-role-selection',

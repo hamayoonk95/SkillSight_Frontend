@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,8 @@ export class SkillsService {
 
   constructor(private http: HttpClient) {}
 
-  getSkillsForRole(roleId: number): Observable<any[]> {
-    const url = `${this.apiUrl}/${roleId}/skills`;
+  getSkillsForRole(roleId: number, category: string | null): Observable<any[]> {
+    const url = `${this.apiUrl}/${roleId}/skills/${category}`;
     return this.http.get<any[]>(url);
   }
 }
