@@ -1,7 +1,7 @@
-<app-role-selection (roleSelected)="selectedRoleId = $event"></app-role-selection>
+<app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
 
-<div class="job-info-container">
-<app-job-info class="job_info" [selectedRoleId]="selectedRoleId"></app-job-info>
+<div *ngIf="selectedRoleId" class="job-info-container">
+  <app-job-info class="job_info" [selectedRoleId]="selectedRoleId" [selectedRoleTitle]="selectedRoleTitle"></app-job-info>
 </div>
 
 <div *ngIf="selectedRoleId" class="visualisation">

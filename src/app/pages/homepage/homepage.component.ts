@@ -17,5 +17,11 @@ import { JobInfoComponent } from '../../components/job-info/job-info.component';
   styleUrl: './homepage.component.css',
 })
 export class HomepageComponent {
-  selectedRoleId: number | null = 2;
+  selectedRoleId: number | null = 1;
+  selectedRoleTitle: string | null = 'Software Developer';
+
+  onRoleSelected(roleData: { id: number; title: string }): void {
+    this.selectedRoleId = roleData.id;
+    this.selectedRoleTitle = roleData.title;
+  }
 }

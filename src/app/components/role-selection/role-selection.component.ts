@@ -10,7 +10,7 @@ import { RolesService } from '../../services/job-roles-service/job-roles.service
   styleUrl: './role-selection.component.css',
 })
 export class RoleSelectionComponent implements OnInit {
-  @Output() roleSelected = new EventEmitter<number>();
+  @Output() roleSelected = new EventEmitter<{ id: number; title: string }>();
   roles: { id: number; roleTitle: string }[] = [];
 
   constructor(private rolesService: RolesService) {}
@@ -28,10 +28,15 @@ export class RoleSelectionComponent implements OnInit {
 
   onRoleChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    const value = Number(selectElement.value);
+    const selectedId = Number(selectElement.value);
 
-    if (!isNaN(value)) {
-      this.roleSelected.emit(value);
+    const selectedRole = this.roles.find((role) => role.id === selectedId);
+
+    if (selectedRole) {
+      this.roleSelected.emit({
+        id: selectedRole.id,
+        title: selectedRole.roleTitle,
+      });
     }
   }
 }
