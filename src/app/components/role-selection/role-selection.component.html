@@ -1,8 +1,8 @@
-<div class="select-container">
-  <select (change)="onRoleChange($event)">
-    <option value="">Select a role</option>
-    <option *ngFor="let role of roles" [value]="role.id">
+<mat-form-field appearance="fill">
+  <mat-label>Select a role</mat-label>
+  <mat-select (selectionChange)="onRoleChange($event)">
+    <mat-option *ngFor="let role of roles" [value]="role.id">
       {{ role.roleTitle }}
-    </option>
-  </select>
-</div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

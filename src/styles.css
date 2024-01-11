@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 :root {
   --primary-color: #1f2747;
@@ -16,4 +17,13 @@ body {
   padding: 0;
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
