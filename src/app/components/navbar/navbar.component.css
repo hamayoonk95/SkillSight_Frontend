@@ -25,11 +25,16 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  z-index: 10;
 }
 
 .menu > li {
   margin: 0 1rem;
   overflow: hidden;
+}
+
+.menu > li a:hover {
+  color: var(--secondary-color);
 }
 
 .active-link {

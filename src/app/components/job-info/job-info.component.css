@@ -1,0 +1,16 @@
+.job-info-heading {
+  color: var(--secondary-color);
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.job-info-count,
+.job-info-date {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.job-info-highlight {
+  font-weight: bold;
+}

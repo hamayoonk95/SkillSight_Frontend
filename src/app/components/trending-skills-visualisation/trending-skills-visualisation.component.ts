@@ -4,6 +4,20 @@ import { NgChartsModule } from 'ng2-charts';
 import { SkillsService } from '../../services/role-skills-service/role-skills.service';
 import { CommonModule } from '@angular/common';
 
+type CategoryColorKey =
+  | 'Language'
+  | 'Library'
+  | 'Tool'
+  | 'Platform'
+  | 'Methodology';
+const categoryColors: Record<CategoryColorKey, string> = {
+  Language: '#FF6384',
+  Library: '#36A2EB',
+  Tool: '#FFCD56',
+  Platform: '#4BC0C0',
+  Methodology: '#9966FF',
+};
+
 @Component({
   selector: 'app-trending-skills-visualisation',
   standalone: true,
@@ -13,11 +27,14 @@ import { CommonModule } from '@angular/common';
 })
 export class TrendingSkillsVisualisationComponent implements OnChanges {
   @Input() selectedRoleId: number | null = null;
-  @Input() category: string | null = null;
-  public barChartData: ChartDataset[] = [{ data: [], label: '' }];
+  @Input() category: CategoryColorKey | null = null;
+  public barChartData: ChartDataset[] = [
+    { data: [], label: '', backgroundColor: [] },
+  ];
   public barChartLabels: string[] = [];
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     indexAxis: 'y',
     scales: {
       x: {
@@ -26,6 +43,9 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
       },
       y: {
         display: true,
+        afterFit: (scaleInstance) => {
+          scaleInstance.width = 200;
+        },
       },
     },
     plugins: {
@@ -49,6 +69,10 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
           );
           this.barChartData[0].data = responses.map(
             (response) => response.frequency
+          );
+          this.barChartData[0].backgroundColor = this.barChartLabels.map(
+            (label) =>
+              this.category ? categoryColors[this.category] : '#CCCCCC'
           );
         },
         (error) => {

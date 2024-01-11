@@ -17,5 +17,5 @@ import { JobInfoComponent } from '../../components/job-info/job-info.component';
   styleUrl: './homepage.component.css',
 })
 export class HomepageComponent {
-  selectedRoleId: number | null = null;
+  selectedRoleId: number | null = 2;
 }
