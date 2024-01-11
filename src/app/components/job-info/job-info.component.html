@@ -1,11 +1,12 @@
 <div *ngIf="jobInfo">
-  <h3 class="job-info-heading">Trending Skills Analysis</h3>
+  <h3 class="job-info-heading">
+    Trending Skills Analysis
+  </h3>
   <p class="job-info-count">
     Analysing <span class="job-info-highlight">
-      {{ jobInfo.jobPostingsCount }}</span> job postings
-  </p>
-  <p class="job-info-date">
-    Since <span class="job-info-highlight">
+      {{ jobInfo.jobPostingsCount }}</span> job postings for
+    <span class="job-info-highlight">
+      {{ selectedRoleTitle }}</span> Since <span class="job-info-highlight">
       {{ jobInfo.cutOffDate | date:'longDate' }}</span>
   </p>
 </div>

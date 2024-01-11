@@ -1,5 +1,10 @@
 <nav class="navbar">
-  <div class="logo"><a href="/" (click)="closeNav()">Logo</a></div>
+
+  <div class="logo-container">
+    <a href="/" (click)="closeNav()">
+      <img class="logo filter-white" src="assets/logo.svg" alt="Logo">
+    </a>
+  </div>
 
   <input id="menu-toggle" type="checkbox" [(ngModel)]="showNav" />
   <label class="menu-button-container" for="menu-toggle">

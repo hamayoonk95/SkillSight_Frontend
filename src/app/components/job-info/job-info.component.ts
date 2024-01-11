@@ -11,6 +11,7 @@ import { JobInfoService } from '../../services/job-info-service/job-info.service
 })
 export class JobInfoComponent implements OnChanges {
   @Input() selectedRoleId: number | null = null;
+  @Input() selectedRoleTitle: string | null = null;
   public jobInfo: any;
 
   constructor(private jobInfoService: JobInfoService) {}
