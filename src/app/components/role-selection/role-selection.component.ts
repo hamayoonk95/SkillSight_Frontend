@@ -15,7 +15,8 @@ import { RolesService } from '../../services/job-roles-service/job-roles.service
 export class RoleSelectionComponent implements OnInit {
   @Output() roleSelected = new EventEmitter<{ id: number; title: string }>();
   roles: { id: number; roleTitle: string }[] = [];
-
+  selectedRoleId: number = 1;
+  
   constructor(private rolesService: RolesService) {}
 
   ngOnInit() {

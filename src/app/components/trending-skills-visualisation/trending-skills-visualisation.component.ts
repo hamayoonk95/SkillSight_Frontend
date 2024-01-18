@@ -44,7 +44,7 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
       y: {
         display: true,
         afterFit: (scaleInstance) => {
-          scaleInstance.width = 200;
+          scaleInstance.width = 100;
         },
       },
     },
@@ -65,7 +65,9 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
       ).subscribe(
         (responses) => {
           this.barChartLabels = responses.map(
-            (response) => response.skill.skillName
+            (response) =>
+              response.skill.skillName.charAt(0).toUpperCase() +
+              response.skill.skillName.slice(1)
           );
           this.barChartData[0].data = responses.map(
             (response) => response.frequency

@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill">
   <mat-label>Select a role</mat-label>
-  <mat-select (selectionChange)="onRoleChange($event)">
+  <mat-select [(value)]="selectedRoleId" (selectionChange)="onRoleChange($event)">
     <mat-option *ngFor="let role of roles" [value]="role.id">
       {{ role.roleTitle }}
     </mat-option>

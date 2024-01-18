@@ -4,7 +4,7 @@
     <!-- First Group - Personal Details -->
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup" class="form-container">
-        <ng-template matStepLabel>Personal Details</ng-template>
+        <ng-template matStepLabel><label class="stepper-label">Personal Details</label></ng-template>
         <mat-form-field appearance="fill">
           <mat-label>First Name</mat-label>
           <input matInput formControlName="firstName" required>
@@ -21,7 +21,7 @@
     <!-- Second Grouo - Account Details -->
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup" class="form-container">
-        <ng-template matStepLabel>Account Details</ng-template>
+        <ng-template matStepLabel><label class="stepper-label">Account Details</label></ng-template>
         <mat-form-field appearance="fill">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" required>
@@ -37,13 +37,14 @@
         <div class="buttons-container">
           <button class="back-btn" mat-button matStepperPrevious>Back</button>
           <button class="next-btn" mat-button matStepperNext>Next</button>
+          <!-- <button class="submit-btn" mat-button (click)="submitRegistration()">Register</button> -->
         </div>
       </form>
     </mat-step>
 
     <!-- Final Step -->
     <mat-step>
-      <ng-template matStepLabel>Complete Registration</ng-template>
+      <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
       <div class="form-container">
         <p>All Complete!</p>
         <button class="submit-btn" mat-button (click)="submitRegistration()">Register</button>
