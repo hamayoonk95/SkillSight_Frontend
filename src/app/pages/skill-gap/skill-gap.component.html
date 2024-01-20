@@ -1,0 +1,18 @@
+<div class="skill-gap-component">
+
+  <!-- Role selection component to choose a role -->
+  <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
+
+
+  <!-- <div *ngIf="allSkillsLoaded">
+    <app-skill-form *ngFor="let category of categories" [category]="category" [skills]="skillsForSelectedRole[category]" (skillSelectionUpdate)="onSkillSelectionUpdate(category, $event)">
+    </app-skill-form>
+  </div> -->
+
+  <!-- Render SkillFormComponent for each category and pass the skills data -->
+  <!-- <div *ngFor="let category of categories">
+    <app-skill-form [category]="category" [skills]="skillsForSelectedRole[category]" *ngIf="skillsForSelectedRole[category]">
+    </app-skill-form>
+  </div> -->
+  <app-skill-form *ngIf="allSkillsLoaded" [skillsForSelectedRole]="skillsForSelectedRole"></app-skill-form>
+</div>

@@ -33,7 +33,7 @@ export class SkillsService {
    * @param category - The category of skills to fetch.
    * @returns An Observable containing an array of SkillResponse.
    */
-  getSkillsForRole(roleId: number, category: string | null): Observable<SkillResponse[]> {
+  getSkillsForRole(roleId: number, category?: string | null): Observable<SkillResponse[]> {
     const url = `${this.apiUrl}/${roleId}/skills/${category}`;
     return this.http.get<SkillResponse[]>(url);
   }

@@ -1,0 +1,54 @@
+<p>skill-category-form works!</p>
+
+<!-- skill-form.component.html -->
+<!-- <div [formGroup]="languageSkillsGroup">
+  <div *ngFor="let skill of skills">
+    <input type="checkbox" [formControlName]="skill.skill.skillName">
+    <label>
+      {{ skill.skill.skillName }}</label>
+  </div>
+</div>
+<button (click)="submitSkills()">Submit Skills</button> -->
+
+<!-- skill-form.component.html -->
+<!-- <div *ngIf="skillFormGroup" [formGroup]="skillFormGroup">
+  <h3>
+    {{ category }} Skills
+  </h3>
+  <div *ngFor="let skill of skills">
+    <label>
+      <input type="checkbox" [formControlName]="skill.skill.skillName">
+      {{ skill.skill.skillName }}
+    </label>
+  </div> -->
+<!-- Add a submit button if needed -->
+<!-- </div> -->
+<div *ngFor="let category of categoryKeys">
+  <div *ngFor="let skill of skillsForSelectedRole[category]">
+    <p>{{skill.skill.skillName}}</p>
+  </div>
+</div>
+<!-- skill-form.component.html -->
+<mat-horizontal-stepper linear #stepper [formGroup]="skillFormGroup" class="stepper-container">
+  <mat-step *ngFor="let category of categoryKeys" [formGroupName]="category">
+    <ng-template matStepLabel>
+      {{ category }} Skills
+    </ng-template>
+    <div *ngFor="let skill of skillsForSelectedRole[category]">
+
+      <!-- <mat-checkbox [formControlName]="skill.skill.skillName">
+        {{ skill.skill.skillName }}
+      </mat-checkbox> -->
+    </div>
+    <button class="next-btn" mat-button matStepperNext>Next</button>
+  </mat-step>
+
+  <!-- Final Step: Complete -->
+  <mat-step>
+    <ng-template matStepLabel>Complete</ng-template>
+    <div class="form-container">
+      <p>All Complete!</p>
+      <button class="submit-btn" mat-button (click)="submitSkills()">Submit Skills</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
