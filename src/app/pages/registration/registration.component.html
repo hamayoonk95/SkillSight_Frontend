@@ -1,0 +1,70 @@
+<!-- Registration Form Container -->
+<div class="registration-form">
+  <!-- Material Horizontal Stepper Component -->
+  <mat-horizontal-stepper linear #stepper class="stepper-container">
+    <!-- First Group - Personal Details -->
+    <mat-step [stepControl]="personalDetailsGroup">
+
+      <form [formGroup]="personalDetailsGroup" class="form-container">
+        <ng-template matStepLabel><label class="stepper-label">Personal Details</label></ng-template>
+
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" required>
+        </mat-form-field>
+
+        <app-role-selection class="role-selection" (roleSelected)="onRoleSelected($event)"></app-role-selection>
+
+        <button class="next-btn" mat-button matStepperNext>Next</button>
+
+      </form>
+
+    </mat-step>
+
+    <!-- Second Grouo - Account Details -->
+    <mat-step [stepControl]="accountDetialsGroup">
+      <form [formGroup]="accountDetialsGroup" class="form-container">
+        <ng-template matStepLabel><label class="stepper-label">Account Details</label></ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" required>
+        </mat-form-field>
+
+        <div class="buttons-container">
+          <button class="back-btn" mat-button matStepperPrevious>Back</button>
+          <button class="next-btn" mat-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+
+    </mat-step>
+
+    <!-- Final Step -->
+    <mat-step>
+      <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
+
+      <div class="form-container">
+        <p>All Complete!</p>
+        <button class="submit-btn" mat-button (click)="submitRegistration()">Register</button>
+      </div>
+
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</div>

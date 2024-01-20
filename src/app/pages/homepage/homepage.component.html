@@ -1,22 +1,25 @@
+<!-- Role selection component to choose a role -->
 <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
 
+<!-- Job Info Component to display information about the selected role -->
 <div *ngIf="selectedRoleId" class="job-info-container">
   <app-job-info class="job_info" [selectedRoleId]="selectedRoleId" [selectedRoleTitle]="selectedRoleTitle"></app-job-info>
 </div>
 
+<!-- Trending Skills Visualisation Components for different categories for the selected role -->
 <div *ngIf="selectedRoleId" class="visualisation">
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Language'">
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Language">
   </app-trending-skills-visualisation>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Library'">
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Library">
   </app-trending-skills-visualisation>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Tool'">
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Tool">
   </app-trending-skills-visualisation>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Platform'">
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Platform">
   </app-trending-skills-visualisation>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="'Methodology'">
+  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Methodology">
   </app-trending-skills-visualisation>
 </div>
