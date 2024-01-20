@@ -49,7 +49,6 @@ export class SkillGapComponent implements OnInit {
           this.skillsForSelectedRole[category] = skills;
           loadedCategories++;
           if (loadedCategories == this.categories.length) {
-            console.log(this.skillsForSelectedRole);
             this.allSkillsLoaded = true;
           }
         },
