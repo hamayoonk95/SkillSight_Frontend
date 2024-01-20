@@ -1,9 +1,12 @@
+<!-- Container for skill charts -->
 <div class="skill-charts" *ngIf="category">
   <h3 class="category-heading">
     {{ category }} Skills
   </h3>
 
+  <!-- Chart container -->
   <div class="chart-container">
+    <!-- Bar chart visualisation for skills -->
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" chartType="bar">
     </canvas>
   </div>

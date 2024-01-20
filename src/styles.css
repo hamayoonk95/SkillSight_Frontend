@@ -23,3 +23,17 @@ html,
 body {
   height: 100%;
 }
+
+/* Snack Bar Styling */
+.snack-bar {
+  margin-top: 90px !important;
+  --mdc-snackbar-container-color: var(--primary-color);
+}
+
+.snack-bar-success {
+  --mdc-snackbar-container-color: var(--success-color);
+}
+
+.snack-bar-error {
+  --mdc-snackbar-container-color: var(--warning-color);
+}

@@ -1,5 +1,6 @@
+// Angular core imports
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user-service/user-service';
+import { Router, RouterModule } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -7,13 +8,24 @@ import {
   Validators,
 } from '@angular/forms';
 
+// Angular Material imports
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
-import { Router, RouterModule } from '@angular/router';
 
+// App service imports
+import { UserService } from '../../services/user-service/user-service';
+import {
+  UserLoginData,
+  LoginResponse,
+} from '../../services/user-service/user.interface';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { SnackbarService } from '../../services/snack-bar/snack-bar.service';
+/**
+ * LoginComponent handles user authentication. It provides a stepper form for users to
+ * enter their credentials and authenticate.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,55 +35,53 @@ import { Router, RouterModule } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatSnackBarModule,
     RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css', '../../styles/form-styles.css'],
 })
 export class LoginComponent implements OnInit {
-  firstFormGroup: FormGroup;
+  loginFormGroup: FormGroup;
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private userService: UserService,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private _formBuilder: FormBuilder, // FormBuilder for creating form groups
+    private userService: UserService, // Service for user-related operations
+    private snackbarService: SnackbarService, // Snackbar for displaying messages
+    private router: Router, // Router for navigation
+    private authService: AuthService // AuthService for handling authentication
   ) {}
 
   ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({
+    // Initialise the form group with validators
+    this.loginFormGroup = this._formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
+  // Function to handle form submission
   submitLogin() {
-    if (this.firstFormGroup.invalid) {
+    // Check if the form is invalid and exit if so
+    if (this.loginFormGroup.invalid) {
       console.error('Form is invalid');
       return;
     }
 
-    const userData = {
-      ...this.firstFormGroup.value,
+    // Extract user data from the form
+    const userLoginData: UserLoginData = {
+      ...this.loginFormGroup.value,
     };
 
-    this.userService.loginUser(userData).subscribe({
-      next: (response) => {
-        console.log('User logged in', response);
-        this.snackBar.open('Logged In Successfully!', 'Close', {
-          duration: 4000,
-          verticalPosition: 'top',
-        });
+    // Attempt to log in the user using the UserService
+    this.userService.loginUser(userLoginData).subscribe({
+      next: (response: LoginResponse) => {
+        this.authService.storeToken(response.token);
+        this.snackbarService.open(response.message, 'success');
         this.router.navigate(['./']);
       },
       error: (error) => {
-        console.log('Error Logging In', error.error.message);
-        const errorMessage = error.error?.message || 'Logging In failed';
-        this.snackBar.open(error.error.message, 'Close', {
-          duration: 4000,
-          verticalPosition: 'top',
-        });
+        const errorMessage = error.error.message;
+        this.snackbarService.open(errorMessage, 'error');
       },
     });
   }

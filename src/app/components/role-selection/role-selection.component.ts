@@ -1,10 +1,22 @@
+// Angular core imports
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+// Angular Material imports
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule, MatSelectChange } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-import { RolesService } from '../../services/job-roles-service/job-roles.service';
 
+// App service imports
+import {
+  RolesService,
+  Role,
+} from '../../services/job-roles-service/job-roles.service';
+
+/**
+ * RoleSelectionComponent handles the functionality of selecting a role from a dropdown.
+ * It emits an event with the selected role's information when a change is made.
+ */
 @Component({
   selector: 'app-role-selection',
   standalone: true,
@@ -13,16 +25,17 @@ import { RolesService } from '../../services/job-roles-service/job-roles.service
   styleUrl: './role-selection.component.css',
 })
 export class RoleSelectionComponent implements OnInit {
-  @Output() roleSelected = new EventEmitter<{ id: number; title: string }>();
-  roles: { id: number; roleTitle: string }[] = [];
-  selectedRoleId: number = 1;
-  
-  constructor(private rolesService: RolesService) {}
+  @Output() roleSelected = new EventEmitter<Role>(); // Event emitter for selected role
+  roles: Role[] = []; // Holds the list of roles
+  selectedRoleId: number = null; // Default selected role ID
 
+  constructor(private rolesService: RolesService) {} // Injecting the RolesService
+
+  // Fetch roles on component initialisation
   ngOnInit() {
     this.rolesService.getRoles().subscribe({
       next: (data: { id: number; roleTitle: string }[]) => {
-        this.roles = data;
+        this.roles = data; // Assign fetched roles
       },
       error: (err) => {
         console.error('There was an error retrieving roles!', err);
@@ -31,15 +44,12 @@ export class RoleSelectionComponent implements OnInit {
   }
 
   onRoleChange(event: MatSelectChange): void {
-    const selectedId = Number(event.value);
+    const selectedId = Number(event.value); // Get the selected role ID
+    const selectedRole = this.roles.find((role) => role.id === selectedId); // Find the selected role
 
-    const selectedRole = this.roles.find((role) => role.id === selectedId);
-
+    // Emit the selected role's information
     if (selectedRole) {
-      this.roleSelected.emit({
-        id: selectedRole.id,
-        title: selectedRole.roleTitle,
-      });
+      this.roleSelected.emit(selectedRole);
     }
   }
 }

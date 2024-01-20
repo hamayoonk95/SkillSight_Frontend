@@ -1,19 +1,35 @@
+<!-- Navbar component -->
 <nav class="navbar">
 
+  <!-- Logo and close navigation interaction -->
   <div class="logo-container">
     <a href="/" (click)="closeNav()">
       <img class="logo filter-white" src="assets/logo.svg" alt="Logo">
     </a>
   </div>
-
+  <!-- Toggle button for mobile navigation menu -->
   <input id="menu-toggle" type="checkbox" [(ngModel)]="showNav" />
   <label class="menu-button-container" for="menu-toggle">
     <div class="menu-button"></div>
   </label>
+
+  <!-- Navigation links -->
   <ul class="menu">
-    <li *ngFor="let link of navigationLinks" routerLinkActive="active-link" (click)="closeNav()">
-      <a [routerLink]="link.route">
-        {{ link.label }}</a>
-    </li>
+    <ng-container *ngFor="let link of navigationLinks">
+      <!-- Nav links -->
+      <ng-container *ngIf="!link.isLogout; else logoutLink">
+        <li routerLinkActive="active-link" (click)="closeNav()" *ngIf="link.isVisible || (authService.isAuthenticated() && link.requiresAuthentication) || (!authService.isAuthenticated() && !link.requiresAuthentication)">
+          <a [routerLink]="link.route">
+            {{ link.label }}</a>
+        </li>
+      </ng-container>
+      <!-- Logout link -->
+      <ng-template #logoutLink>
+        <li *ngIf="authService.isAuthenticated()" (click)="onLogout()">
+          <a href="javascript:void(0)">
+            {{ link.label }}</a>
+        </li>
+      </ng-template>
+    </ng-container>
   </ul>
 </nav>

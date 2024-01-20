@@ -1,4 +1,6 @@
+// Angular core imports
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -6,15 +8,24 @@ import {
   Validators,
 } from '@angular/forms';
 
+// Angular Material imports
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { RoleSelectionComponent } from '../../components/role-selection/role-selection.component';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
-import { Router, RouterModule } from '@angular/router';
-import { UserService } from '../../services/user-service/user-service';
 
+// App imports
+import { RoleSelectionComponent } from '../../components/role-selection/role-selection.component';
+import { SnackbarService } from '../../services/snack-bar/snack-bar.service';
+import { UserService } from '../../services/user-service/user-service';
+import {
+  UserRegistrationData,
+  LoginResponse,
+} from '../../services/user-service/user.interface';
+import { Role } from '../../services/job-roles-service/job-roles.service';
+/**
+ * RegistrationComponent handles user registration.
+ */
 @Component({
   selector: 'app-registration',
   standalone: true,
@@ -24,7 +35,6 @@ import { UserService } from '../../services/user-service/user-service';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatSnackBarModule,
     RouterModule,
     RoleSelectionComponent,
   ],
@@ -32,24 +42,26 @@ import { UserService } from '../../services/user-service/user-service';
   styleUrls: ['./registration.component.css', '../../styles/form-styles.css'],
 })
 export class RegistrationComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  personalDetailsGroup: FormGroup; // FormGroup for personal details
+  accountDetialsGroup: FormGroup; // FormGroup for account details
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private userService: UserService,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private _formBuilder: FormBuilder, // FormBuilder for creating form groups
+    private userService: UserService, // Service for user-related operations
+    private router: Router, // Router for navigation
+    private snackbarService: SnackbarService // Snackbar for displaying messages
   ) {}
 
   ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({
+    // Initialize the personal details form group with validators
+    this.personalDetailsGroup = this._formBuilder.group({
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       jobRoleId: [null, Validators.required],
     });
 
-    this.secondFormGroup = this._formBuilder.group({
+    // Initialize the account details form group with validators
+    this.accountDetialsGroup = this._formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(50)]],
       email: [
         '',
@@ -59,37 +71,46 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  onRoleSelected(role: { id: number; title: string }): void {
-    this.firstFormGroup.controls['jobRoleId'].setValue(role.id);
+  // Handles the event when a role is selected in the RoleSelectionComponent.
+  onRoleSelected(role: Role): void {
+    this.personalDetailsGroup.controls['jobRoleId'].setValue(role.id);
   }
 
+  // Submits the registration form.
   submitRegistration() {
-    if (this.firstFormGroup.invalid || this.secondFormGroup.invalid) {
-      console.error('Form is invalid');
+    // Check for invalid input in personal details form group.
+    if (this.personalDetailsGroup.invalid) {
+      this.snackbarService.open(
+        'Please correct the errors in your personal details.',
+        'error'
+      );
       return;
     }
 
-    const userData = {
-      ...this.firstFormGroup.value,
-      ...this.secondFormGroup.value,
+    // Check for invalid input in account details form group.
+    if (this.accountDetialsGroup.invalid) {
+      this.snackbarService.open(
+        'Please correct the errors in your account details.',
+        'error'
+      );
+      return;
+    }
+
+    // Combines values from both form groups into one object
+    const userData: UserRegistrationData = {
+      ...this.personalDetailsGroup.value,
+      ...this.accountDetialsGroup.value,
     };
 
+    // Attempts to register the user with the combined form data.
     this.userService.registerUser(userData).subscribe({
-      next: (response) => {
-        console.log('User registered', response);
-        this.snackBar.open('Registration Successful', 'Close', {
-          duration: 4000,
-          verticalPosition: 'top',
-        });
+      next: (response: LoginResponse) => {
+        this.snackbarService.open(response.message, 'success');
         this.router.navigate(['./login']);
       },
       error: (error) => {
-        console.error('Registration error', error.error.message);
         const errorMessage = error.error?.message || 'Registration failed';
-        this.snackBar.open(error.error.message, 'Close', {
-          duration: 4000,
-          verticalPosition: 'top',
-        });
+        this.snackbarService.open(errorMessage, 'error');
       },
     });
   }

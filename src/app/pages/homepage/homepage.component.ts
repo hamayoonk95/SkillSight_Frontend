@@ -1,9 +1,18 @@
+// Angular core imports
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+// App imports
 import { RoleSelectionComponent } from '../../components/role-selection/role-selection.component';
 import { TrendingSkillsVisualisationComponent } from '../../components/trending-skills-visualisation/trending-skills-visualisation.component';
 import { JobInfoComponent } from '../../components/job-info/job-info.component';
+import { Category } from './category.enum';
+import { Role } from '../../services/job-roles-service/job-roles.service';
 
+/**
+ * HomepageComponent, main landing page of the application.
+ * It integrates various components like RoleSelectionComponent, TrendingSkillsVisualisationComponent, and JobInfoComponent.
+ */
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -17,11 +26,13 @@ import { JobInfoComponent } from '../../components/job-info/job-info.component';
   styleUrl: './homepage.component.css',
 })
 export class HomepageComponent {
-  selectedRoleId: number | null = 1;
-  selectedRoleTitle: string | null = 'Software Developer';
+  Category = Category;
+  selectedRoleId: number | null = 1; // Holds the selected role ID
+  selectedRoleTitle: string | null = 'Software Developer'; // Holds the selected role title
 
-  onRoleSelected(roleData: { id: number; title: string }): void {
+  // Handles the event when a role is selected in the RoleSelectionComponent.
+  onRoleSelected(roleData: Role): void {
     this.selectedRoleId = roleData.id;
-    this.selectedRoleTitle = roleData.title;
+    this.selectedRoleTitle = roleData.roleTitle;
   }
 }

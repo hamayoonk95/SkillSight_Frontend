@@ -1,23 +1,22 @@
+// Angular core imports
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
-import { NgChartsModule } from 'ng2-charts';
-import { SkillsService } from '../../services/role-skills-service/role-skills.service';
 import { CommonModule } from '@angular/common';
 
-type CategoryColorKey =
-  | 'Language'
-  | 'Library'
-  | 'Tool'
-  | 'Platform'
-  | 'Methodology';
-const categoryColors: Record<CategoryColorKey, string> = {
-  Language: '#FF6384',
-  Library: '#36A2EB',
-  Tool: '#FFCD56',
-  Platform: '#4BC0C0',
-  Methodology: '#9966FF',
-};
+// Chart.js and ng2-charts imports
+import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { NgChartsModule } from 'ng2-charts';
 
+// App imports
+import {
+  SkillsService,
+  SkillResponse,
+} from '../../services/role-skills-service/role-skills.service';
+import { categoryColors, CategoryColorKey } from './category-colors';
+
+/**
+ * TrendingSkillsVisualisationComponent visualises the trending skills in different categories
+ * for a selected role. It displays the data in a bar chart format.
+ */
 @Component({
   selector: 'app-trending-skills-visualisation',
   standalone: true,
@@ -26,11 +25,13 @@ const categoryColors: Record<CategoryColorKey, string> = {
   styleUrls: ['./trending-skills-visualisation.component.css'],
 })
 export class TrendingSkillsVisualisationComponent implements OnChanges {
-  @Input() selectedRoleId: number | null = null;
-  @Input() category: CategoryColorKey | null = null;
+  @Input() selectedRoleId: number | null = null; // Input for the selected role ID
+  @Input() category: CategoryColorKey = null; // Input for the selected category
   public barChartData: ChartDataset[] = [
     { data: [], label: '', backgroundColor: [] },
   ];
+
+  // Chart data and options
   public barChartLabels: string[] = [];
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -55,26 +56,33 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
     },
   };
 
-  constructor(private SkillsService: SkillsService) {}
+  constructor(private SkillsService: SkillsService) {} // Injecting the SkillsService
 
+  // Fetch and process skill data on input changes
   ngOnChanges(changes: SimpleChanges): void {
+    // Check if both category and selectedRoleId are valid
     if (this.category && this.selectedRoleId) {
+      // Fetch skills data for the selected role and category
       this.SkillsService.getSkillsForRole(
         this.selectedRoleId,
         this.category
       ).subscribe(
-        (responses) => {
+        (responses: SkillResponse[]) => {
+          // Set the bar chart labels to skill names with the first letter capitalised
           this.barChartLabels = responses.map(
-            (response) =>
+            (response: SkillResponse) =>
               response.skill.skillName.charAt(0).toUpperCase() +
               response.skill.skillName.slice(1)
           );
+
+          // Set the bar chart data to the frequency of each skill
           this.barChartData[0].data = responses.map(
             (response) => response.frequency
           );
+
+          // Set the background color for each data point in the bar chart
           this.barChartData[0].backgroundColor = this.barChartLabels.map(
-            (label) =>
-              this.category ? categoryColors[this.category] : '#CCCCCC'
+            () => categoryColors[this.category] || '#CCCCCC'
           );
         },
         (error) => {

@@ -1,12 +1,18 @@
+<!-- Conditional rendering if jobInfo is available -->
 <div *ngIf="jobInfo">
   <h3 class="job-info-heading">
     Trending Skills Analysis
   </h3>
+
+  <!-- Paragraph displaying role analysis details -->
   <p class="job-info-count">
     Analysing <span class="job-info-highlight">
-      {{ jobInfo.jobPostingsCount }}</span> job postings for
+      {{ jobInfo.jobCount }}</span>
+    job postings for
     <span class="job-info-highlight">
-      {{ selectedRoleTitle }}</span> Since <span class="job-info-highlight">
+      {{ selectedRoleTitle }}</span>
+    Since
+    <span class="job-info-highlight">
       {{ jobInfo.cutOffDate | date:'longDate' }}</span>
   </p>
 </div>

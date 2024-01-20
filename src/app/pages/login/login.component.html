@@ -1,10 +1,11 @@
 <div class="login-form">
 
+  <!-- Material Stepper Component -->
   <mat-horizontal-stepper linear #stepper class="stepper-container">
 
-    <!-- First Group - Personal Details -->
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup" class="form-container">
+    <!-- Step 1: Login Details -->
+    <mat-step [stepControl]="loginFormGroup">
+      <form [formGroup]="loginFormGroup" class="form-container">
         <ng-template matStepLabel><label class="stepper-label">Login Details</label></ng-template>
         <mat-form-field appearance="fill">
           <mat-label>Username</mat-label>
@@ -19,7 +20,7 @@
     </mat-step>
 
 
-    <!-- Final Step -->
+    <!-- Final Step: Complete -->
     <mat-step>
       <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
       <div class="form-container">
