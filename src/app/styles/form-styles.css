@@ -1,12 +1,14 @@
 .login-form,
 .registration-form {
-  margin: auto auto;
-  max-width: 650px;
+  min-height: 80vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .stepper-container {
   width: 100%;
+  max-width: 60%;
   height: 100%;
 }
 
@@ -18,7 +20,7 @@
 }
 
 mat-form-field {
-  width: 90%;
+  width: 80%;
   margin-bottom: 10px;
 }
 
@@ -56,10 +58,11 @@ mat-form-field {
   background-color: #005f6b;
 }
 
-@media (max-width: 550px) {
-  .login-form,
-  .registration-form {
-    max-width: 350px;
+@media (max-width: 600px) {
+  .stepper-container {
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
   }
 
   .stepper-label {
