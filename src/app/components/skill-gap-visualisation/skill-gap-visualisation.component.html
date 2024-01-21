@@ -1,0 +1,13 @@
+<div *ngIf="skillsGap">
+  <h2>Skills Gap Summary</h2>
+  <div *ngFor="let category of categories">
+    <h3>
+      {{ category }}
+    </h3>
+    <ul>
+      <li *ngFor="let skill of skillsGap[category]">
+        {{ skill }}
+      </li>
+    </ul>
+  </div>
+</div>

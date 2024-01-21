@@ -1,5 +1,12 @@
 // Angular core imports
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -30,6 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class SkillFormComponent implements OnInit {
   @Input() skillsForSelectedRole: any; // Skills data input from parent component
+  @Output() skillsSubmitted = new EventEmitter<any>();
   skillFormGroup: FormGroup; // Form group for all skills
   categoryKeys: string[] = []; // Array of category names
   controlNames: string[] = []; // Array of form control names
@@ -98,5 +106,9 @@ export class SkillFormComponent implements OnInit {
     return parts.join(' ').replace(/_/g, ' '); // Replace underscores with spaces
   }
 
-  submitSkills() {}
+  submitSkills() {
+    this.skillsSubmitted.emit(this.skillFormGroup.value);
+    // console.log(this.skillFormGroup.value);
+    // console.log(this.skillsForSelectedRole);
+  }
 }

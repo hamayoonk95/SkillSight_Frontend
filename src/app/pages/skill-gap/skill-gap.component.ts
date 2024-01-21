@@ -9,13 +9,19 @@ import {
   SkillsService,
 } from '../../services/role-skills-service/role-skills.service';
 import { SkillFormComponent } from '../../components/skill-form/skill-form.component';
+import { SkillGapVisualisationComponent } from '../../components/skill-gap-visualisation/skill-gap-visualisation.component';
 /**
  * SkillGapComponent, performs skill-gap analysis.
  */
 @Component({
   selector: 'app-skill-gap',
   standalone: true,
-  imports: [CommonModule, RoleSelectionComponent, SkillFormComponent],
+  imports: [
+    CommonModule,
+    RoleSelectionComponent,
+    SkillFormComponent,
+    SkillGapVisualisationComponent,
+  ],
   templateUrl: './skill-gap.component.html',
   styleUrl: './skill-gap.component.css',
 })
@@ -23,6 +29,7 @@ export class SkillGapComponent implements OnInit {
   selectedRole: Role | null = null;
   skillsForSelectedRole = {};
   allSkillsLoaded = false;
+  skillsGap: any;
 
   categories: string[] = [
     'Language',
@@ -37,8 +44,17 @@ export class SkillGapComponent implements OnInit {
   ngOnInit(): void {}
 
   onRoleSelected(selectedRole: Role): void {
-    this.selectedRole = selectedRole;
-    this.fetchSkillsForSelectedRole(this.selectedRole.id);
+    if (!this.selectedRole || this.selectedRole.id !== selectedRole.id) {
+      this.selectedRole = selectedRole;
+      this.resetSkillForm(); // Add this line
+      this.fetchSkillsForSelectedRole(this.selectedRole.id);
+    }
+  }
+
+  resetSkillForm(): void {
+    // Reset the skill form
+    this.skillsForSelectedRole = {}; // Reset the skills
+    this.allSkillsLoaded = false; // Indicate that skills are not loaded
   }
 
   fetchSkillsForSelectedRole(roleId: number): void {
@@ -59,14 +75,28 @@ export class SkillGapComponent implements OnInit {
     });
   }
 
-  // checkIfAllSkillsLoaded() {
-  //   this.allSkillsLoaded = this.categories.every(
-  //     (category) => this.skillsLoaded[category]
-  //   );
-  // }
+  handleSkillsSubmission(selectedSkills: any): void {
+    this.skillsGap = this.processSkills(
+      selectedSkills,
+      this.skillsForSelectedRole
+    );
+  }
 
-  // onSkillSelectionUpdate(category: string, selectedSkills: string[]) {
-  //   console.log(`Selected skills for ${category}:`, selectedSkills);
-  //   // Handle the selected skills here (store in a service or component state)
-  // }
+  processSkills(selectedSkills: any, skillsForSelectedRole: any): any {
+    let skillsGap = {};
+    this.categories.forEach((category) => {
+      const requiredSkills = skillsForSelectedRole[category].map(
+        (skill) => skill.skill.skillName
+      );
+      const selectedCategorySkills = selectedSkills[category] || [];
+      const missingSkills = requiredSkills.filter(
+        (skill) => !selectedCategorySkills.includes(skill)
+      );
+      if (missingSkills.length > 0) {
+        skillsGap[category] = missingSkills;
+      }
+    });
+
+    return skillsGap;
+  }
 }

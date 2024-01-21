@@ -4,3 +4,12 @@
   flex-direction: column;
   align-items: center;
 }
+
+.skill-gap-component app-role-selection {
+  margin-top: 2rem;
+}
+
+.skill-gap-component app-skill-form {
+  width: 90%;
+  margin: 1rem auto;
+}

@@ -1,12 +1,12 @@
 <div class="skill-form-container">
-  <form [formGroup]="skillFormGroup" class="form-container">
-    <mat-horizontal-stepper linear #stepper class="stepper-container">
+  <form [formGroup]="skillFormGroup" class="form-container1">
+    <mat-horizontal-stepper orientation="vertical" linear #stepper class="stepper-container1">
       <mat-step *ngFor="let category of categoryKeys" [stepControl]="skillFormGroup" class="category-step">
         <ng-template matStepLabel>
-          <label class="stepper-label">{{category}}</label>
+          <label class="stepper-label1">{{category}}</label>
         </ng-template>
-        <div class="skill-select-container">
-          <mat-form-field appearance="fill" class="skill-select">
+        <div class="skill-select-container1">
+          <mat-form-field appearance="fill" class="skill-select1">
             <mat-label>Select
               {{ category }} Skills
             </mat-label>
@@ -17,16 +17,15 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="buttons-container">
-          <button class="next-btn" mat-button matStepperNext>Next</button>
-        </div>
       </mat-step>
       <!-- Final Step: Complete -->
-      <mat-step class="complete-step">
-        <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
-        <div class="complete-container">
+      <mat-step class="complete-step1">
+        <ng-template matStepLabel><label class="stepper-label1">Complete</label></ng-template>
+        <div class="complete-container1">
           <p>All Complete!</p>
-          <button class="submit-btn" mat-button (click)="submitSkills()">Register</button>
+          <div class="buttons-container">
+            <button class="submit-btn" mat-button (click)="submitSkills()">Register</button>
+          </div>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
