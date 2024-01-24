@@ -1,12 +1,6 @@
 // Angular core imports
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -20,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-skill-form',
@@ -31,19 +26,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCheckboxModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatButtonModule,
   ],
   templateUrl: './skill-form.component.html',
   styleUrls: ['./skill-form.component.css', '../../styles/form-styles.css'],
 })
 export class SkillFormComponent implements OnInit {
   @Input() skillsForSelectedRole: any; // Skills data input from parent component
-  @Output() skillsSubmitted = new EventEmitter<any>();
+  // @Output() skillsSubmitted = new EventEmitter<any>();
   skillFormGroup: FormGroup; // Form group for all skills
   categoryKeys: string[] = []; // Array of category names
   controlNames: string[] = []; // Array of form control names
   skillsOptions: { [category: string]: string[] } = {};
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.skillFormGroup = this.fb.group({}); // Initialize the form group
   }
 
@@ -107,8 +103,33 @@ export class SkillFormComponent implements OnInit {
   }
 
   submitSkills() {
-    this.skillsSubmitted.emit(this.skillFormGroup.value);
-    // console.log(this.skillFormGroup.value);
-    // console.log(this.skillsForSelectedRole);
+    const selectedSKills = this.skillFormGroup.value;
+    const skillsGap = this.calculateSkillsGap(
+      selectedSKills,
+      this.skillsForSelectedRole
+    );
+    console.log(skillsGap);
+
+    this.router.navigate(['/skill-gap-visualisation'], {
+      state: { skillsGap, categories: this.categoryKeys },
+    });
+  }
+
+  calculateSkillsGap(selectedSkills: any, skillsForSelectedRole: any): any {
+    let skillsGap = {};
+    this.categoryKeys.forEach((category) => {
+      const requiredSkills = skillsForSelectedRole[category].map(
+        (skill) => skill.skill.skillName
+      );
+      const selectedCategorySkills = selectedSkills[category] || [];
+      const missingSkills = requiredSkills.filter(
+        (skill) => !selectedCategorySkills.includes(skill)
+      );
+      if (missingSkills.length > 0) {
+        skillsGap[category] = missingSkills;
+      }
+    });
+
+    return skillsGap;
   }
 }

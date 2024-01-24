@@ -3,7 +3,6 @@
   <!-- Role selection component to choose a role -->
   <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
 
-  <app-skill-form *ngIf="allSkillsLoaded" [skillsForSelectedRole]="skillsForSelectedRole" (skillsSubmitted)="handleSkillsSubmission($event)"></app-skill-form>
+  <app-skill-form *ngIf="allSkillsLoaded" [skillsForSelectedRole]="skillsForSelectedRole"></app-skill-form>
 
-  <app-skill-gap-visualisation *ngIf="skillsGap" [skillsGap]="skillsGap" [categories]="categories"></app-skill-gap-visualisation>
 </div>
