@@ -8,14 +8,26 @@ app-skill-form {
   min-height: 100%;
 }
 
-.skill-select-container1 {
+.skill-select-container {
   margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 
-.skill-select1 {
-  width: 100%;
+.skill-select {
+  width: 90%;
+  margin-bottom: 0;
 }
 
-.mat-vertical-stepper-content .mat-vertical-content {
-  padding: 0 24px 0 24px;
+::ng-deep .mat-vertical-content {
+  padding: 0 24px 0 24px !important;
+}
+
+.complete-container {
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

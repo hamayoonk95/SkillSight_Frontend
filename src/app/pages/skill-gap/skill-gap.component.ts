@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 // App imports
 import { RoleSelectionComponent } from '../../components/role-selection/role-selection.component';
@@ -9,19 +10,14 @@ import {
   SkillsService,
 } from '../../services/role-skills-service/role-skills.service';
 import { SkillFormComponent } from '../../components/skill-form/skill-form.component';
-import { SkillGapVisualisationComponent } from '../../components/skill-gap-visualisation/skill-gap-visualisation.component';
+
 /**
  * SkillGapComponent, performs skill-gap analysis.
  */
 @Component({
   selector: 'app-skill-gap',
   standalone: true,
-  imports: [
-    CommonModule,
-    RoleSelectionComponent,
-    SkillFormComponent,
-    SkillGapVisualisationComponent,
-  ],
+  imports: [CommonModule, RoleSelectionComponent, SkillFormComponent],
   templateUrl: './skill-gap.component.html',
   styleUrl: './skill-gap.component.css',
 })
@@ -29,7 +25,7 @@ export class SkillGapComponent implements OnInit {
   selectedRole: Role | null = null;
   skillsForSelectedRole = {};
   allSkillsLoaded = false;
-  skillsGap: any;
+  // skillsGap: any;
 
   categories: string[] = [
     'Language',
@@ -39,7 +35,7 @@ export class SkillGapComponent implements OnInit {
     'Methodology',
   ];
 
-  constructor(private skillService: SkillsService) {}
+  constructor(private skillService: SkillsService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -73,30 +69,5 @@ export class SkillGapComponent implements OnInit {
         },
       });
     });
-  }
-
-  handleSkillsSubmission(selectedSkills: any): void {
-    this.skillsGap = this.processSkills(
-      selectedSkills,
-      this.skillsForSelectedRole
-    );
-  }
-
-  processSkills(selectedSkills: any, skillsForSelectedRole: any): any {
-    let skillsGap = {};
-    this.categories.forEach((category) => {
-      const requiredSkills = skillsForSelectedRole[category].map(
-        (skill) => skill.skill.skillName
-      );
-      const selectedCategorySkills = selectedSkills[category] || [];
-      const missingSkills = requiredSkills.filter(
-        (skill) => !selectedCategorySkills.includes(skill)
-      );
-      if (missingSkills.length > 0) {
-        skillsGap[category] = missingSkills;
-      }
-    });
-
-    return skillsGap;
   }
 }
