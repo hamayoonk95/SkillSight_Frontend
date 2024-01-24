@@ -108,10 +108,13 @@ export class SkillFormComponent implements OnInit {
       selectedSKills,
       this.skillsForSelectedRole
     );
-    console.log(skillsGap);
 
     this.router.navigate(['/skill-gap-visualisation'], {
-      state: { skillsGap, categories: this.categoryKeys },
+      state: {
+        skillsGap,
+        categories: this.categoryKeys,
+        skillsForSelectedRole: this.skillsForSelectedRole,
+      },
     });
   }
 
