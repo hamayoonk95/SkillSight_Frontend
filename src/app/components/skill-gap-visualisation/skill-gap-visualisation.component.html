@@ -1,13 +1,51 @@
-<div *ngIf="skillsGap">
-  <h2>Skills Gap Summary</h2>
-  <div *ngFor="let category of categories">
-    <h3>
-      {{ category }}
-    </h3>
-    <ul>
-      <li *ngFor="let skill of skillsGap[category]">
-        {{ skill }}
-      </li>
-    </ul>
-  </div>
+<div class="accordion-wrapper">
+
+  <h2 class="skill-gap-heading">Your Skill Gap Analysis</h2>
+
+  <mat-accordion multi="true" *ngIf="categoryStats.length">
+    <mat-expansion-panel *ngFor="let stat of categoryStats let i = index" [expanded]="i === 0">
+      <mat-expansion-panel-header>
+        <div class="header-content">
+          <div class="category-name">
+            {{ stat.categoryName }}
+          </div>
+          <div class="progress-bar-container">
+            <mat-progress-bar mode="determinate" [value]="stat.progressPercentage" color="primary">
+            </mat-progress-bar>
+            <span class="progress-text">
+              {{ stat.knownSkills }}/
+              {{ stat.totalSkills }}</span>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+
+      <ng-container *ngIf="stat.knownSkills > 0">
+        <div class="skills-chips">
+          <h3>Known Skills</h3>
+          <mat-chip-set>
+            <ng-container *ngFor="let skill of skillsForSelectedRole[stat.categoryName]">
+              <mat-chip *ngIf="!isSkillMissing(stat, skill)" selectable="false" class="known-skill">
+                {{ skill.skill.skillName }}
+              </mat-chip>
+            </ng-container>
+          </mat-chip-set>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="stat.missingSkills.length > 0">
+        <div class="skills-chips">
+          <h3>Skills to Improve</h3>
+          <mat-chip-set>
+            <ng-container *ngFor="let skill of skillsForSelectedRole[stat.categoryName]">
+              <mat-chip *ngIf="isSkillMissing(stat, skill)" selectable="false" class="missing-skill">
+                {{ skill.skill.skillName }}
+              </mat-chip>
+            </ng-container>
+          </mat-chip-set>
+        </div>
+      </ng-container>
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
