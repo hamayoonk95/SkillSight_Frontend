@@ -27,8 +27,8 @@ import { Role } from '../../services/job-roles-service/job-roles.service';
 })
 export class HomepageComponent {
   Category = Category;
-  selectedRoleId: number | null = 1; // Holds the selected role ID
-  selectedRoleTitle: string | null = 'Software Developer'; // Holds the selected role title
+  selectedRoleId: number | null; // Holds the selected role ID
+  selectedRoleTitle: string | null; // Holds the selected role title
 
   // Handles the event when a role is selected in the RoleSelectionComponent.
   onRoleSelected(roleData: Role): void {

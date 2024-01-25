@@ -1,9 +1,7 @@
 .login-form,
 .registration-form {
-  min-height: 80vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .stepper-container {

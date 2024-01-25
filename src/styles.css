@@ -13,8 +13,10 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  padding: 0;
-  background-color: var(--background-color);
+  background-image: url("./assets/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text-color);
 }
 
@@ -22,6 +24,8 @@ html,
 body {
   height: 100%;
   margin: 0;
+  padding: 0;
+  /* padding-top: 2.4rem; */
 }
 
 /* Snack Bar Styling */
