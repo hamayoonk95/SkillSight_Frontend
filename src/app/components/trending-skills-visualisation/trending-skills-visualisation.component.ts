@@ -12,6 +12,7 @@ import {
   SkillResponse,
 } from '../../services/role-skills-service/role-skills.service';
 import { categoryColors, CategoryColorKey } from './category-colors';
+import { Category } from '../../pages/homepage/category.enum';
 
 /**
  * TrendingSkillsVisualisationComponent visualises the trending skills in different categories
@@ -90,5 +91,17 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
         }
       );
     }
+  }
+
+   getPluralCategory(category: CategoryColorKey): string {
+    const plurals = {
+      [Category.Language]: 'Languages',
+      [Category.Library]: 'Libraries',
+      [Category.Tool]: 'Tools',
+      [Category.Platform]: 'Platforms',
+      [Category.Methodology]: 'Methodologies',
+    };
+
+    return plurals[category] || category;
   }
 }

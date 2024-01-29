@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       // If the user is not authenticated, show a snackbar message
-      this.snackBarService.open('You need to be logged in', 'success');
+      this.snackBarService.open('You need to be logged in', 'error');
       // Redirect to the login page and return a UrlTree
       return this.router.createUrlTree(['/login']);
     }
