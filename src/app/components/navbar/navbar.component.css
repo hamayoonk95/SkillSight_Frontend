@@ -50,20 +50,23 @@
 .menu > li {
   margin: 0 1rem;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s;
 }
 
-.menu > li a:hover {
-  color: var(--text-color);
-}
-
-.active-link {
-  color: var(--text-color);
+.menu li.active-link a {
+  color: var(--secondary-color);
 }
 
 .menu > li a {
   color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
+  transition: color 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu > li a:hover {
+  color: var(--secondary-color);
 }
 
 .menu-button-container {
@@ -88,8 +91,15 @@
   position: absolute;
   height: 4px;
   width: 30px;
-  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
   border-radius: 2px;
+}
+
+.menu-button-container:hover .menu-button,
+.menu-button-container:hover .menu-button::before,
+.menu-button-container:hover .menu-button::after {
+  background-color: var(--secondary-color);
 }
 
 .navbar.scrolled .menu-button,
@@ -136,6 +146,7 @@
     justify-content: center;
     align-items: center;
   }
+
   #menu-toggle ~ .menu li {
     height: 0;
     margin: 0;
@@ -156,7 +167,15 @@
     margin: 0;
     padding: 0.5em 0;
     width: 100%;
-    background-color: var(--primary-color);
+  }
+
+  .navbar.scrolled .menu > li {
+    background-color: rgba(31, 39, 71, 0.5);
+    color: var(--secondary-color);
+  }
+
+  .navbar.scrolled .menu > li a:hover {
+    color: var(--secondary-color);
   }
 
   .menu > li:not(:last-child) {

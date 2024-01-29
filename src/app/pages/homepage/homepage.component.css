@@ -6,17 +6,11 @@
 }
 
 .banner-container {
-  width: 100%;
+  margin: -6rem 0 0 0;
 }
 
 .hero-section {
-  height: 100%;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--text-color);
-  overflow: hidden;
 }
 
 .hero-section h1 {
@@ -32,11 +26,10 @@
 
 .role-selection-component {
   margin: 1rem auto;
-  text-align: center;
 }
 
 .job-info-container {
-  width: 50%;
+  width: 60%;
   background-color: #fff;
   border-left: 4px solid #007bff;
   border-right: 4px solid #007bff;

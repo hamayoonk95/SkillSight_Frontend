@@ -18,7 +18,7 @@
     <ng-container *ngFor="let link of navigationLinks">
       <!-- Nav links -->
       <ng-container *ngIf="!link.isLogout; else logoutLink">
-        <li routerLinkActive="active-link" (click)="closeNav()" *ngIf="link.isVisible || (authService.isAuthenticated() && link.requiresAuthentication) || (!authService.isAuthenticated() && !link.requiresAuthentication)">
+        <li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="closeNav()" *ngIf="link.isVisible || (authService.isAuthenticated() && link.requiresAuthentication) || (!authService.isAuthenticated() && !link.requiresAuthentication)">
           <a [routerLink]="link.route">
             {{ link.label }}</a>
         </li>
