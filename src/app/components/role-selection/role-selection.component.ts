@@ -27,7 +27,7 @@ import {
 export class RoleSelectionComponent implements OnInit {
   @Output() roleSelected = new EventEmitter<Role>(); // Event emitter for selected role
   roles: Role[] = []; // Holds the list of roles
-  selectedRoleId: number = null; // Default selected role ID
+  selectedRoleId: number = null; // Selected role ID
 
   constructor(private rolesService: RolesService) {} // Injecting the RolesService
 

@@ -1,10 +1,10 @@
 <!-- Navbar component -->
-<nav class="navbar">
+<nav class="navbar" [class.scrolled]="isScrolled">
 
   <!-- Logo and close navigation interaction -->
   <div class="logo-container">
     <a href="/" (click)="closeNav()">
-      <img class="logo filter-white" src="assets/logo.svg" alt="Logo">
+      <img [class.filter-white]="isScrolled" class="logo filter-white" src="assets/logo.svg" alt="Logo">
     </a>
   </div>
   <!-- Toggle button for mobile navigation menu -->
@@ -18,7 +18,7 @@
     <ng-container *ngFor="let link of navigationLinks">
       <!-- Nav links -->
       <ng-container *ngIf="!link.isLogout; else logoutLink">
-        <li routerLinkActive="active-link" (click)="closeNav()" *ngIf="link.isVisible || (authService.isAuthenticated() && link.requiresAuthentication) || (!authService.isAuthenticated() && !link.requiresAuthentication)">
+        <li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="closeNav()" *ngIf="link.isVisible || (authService.isAuthenticated() && link.requiresAuthentication) || (!authService.isAuthenticated() && !link.requiresAuthentication)">
           <a [routerLink]="link.route">
             {{ link.label }}</a>
         </li>

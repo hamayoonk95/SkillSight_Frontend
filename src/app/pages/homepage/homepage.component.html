@@ -1,25 +1,41 @@
-<!-- Role selection component to choose a role -->
-<app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
-
-<!-- Job Info Component to display information about the selected role -->
-<div *ngIf="selectedRoleId" class="job-info-container">
-  <app-job-info class="job_info" [selectedRoleId]="selectedRoleId" [selectedRoleTitle]="selectedRoleTitle"></app-job-info>
+<div class="banner-container" *ngIf="!selectedRoleId; else visualizationsSection">
+  <div class="hero-section">
+    <h1>Welcome to SkillSight</h1>
+    <p>Discover and analyse the trending skills required for tech roles in the industry.</p>
+    <div class="role-selection-component">
+      <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
+    </div>
+  </div>
 </div>
 
-<!-- Trending Skills Visualisation Components for different categories for the selected role -->
-<div *ngIf="selectedRoleId" class="visualisation">
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Language">
-  </app-trending-skills-visualisation>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Library">
-  </app-trending-skills-visualisation>
+<ng-template #visualizationsSection>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Tool">
-  </app-trending-skills-visualisation>
+  <!-- Role selection component to choose a role -->
+  <div class="role-selection-component">
+    <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
+  </div>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Platform">
-  </app-trending-skills-visualisation>
+  <!-- Job Info Component to display information about the selected role -->
+  <div *ngIf="selectedRoleId" class="job-info-container">
+    <app-job-info class="job_info" [selectedRoleId]="selectedRoleId" [selectedRoleTitle]="selectedRoleTitle"></app-job-info>
+  </div>
 
-  <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Methodology">
-  </app-trending-skills-visualisation>
-</div>
+  <!-- Trending Skills Visualisation Components for different categories for the selected role -->
+  <div *ngIf="selectedRoleId" class="visualisation">
+    <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Language">
+    </app-trending-skills-visualisation>
+
+    <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Library">
+    </app-trending-skills-visualisation>
+
+    <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Tool">
+    </app-trending-skills-visualisation>
+
+    <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Platform">
+    </app-trending-skills-visualisation>
+
+    <app-trending-skills-visualisation [selectedRoleId]="selectedRoleId" [category]="Category.Methodology">
+    </app-trending-skills-visualisation>
+  </div>
+</ng-template>

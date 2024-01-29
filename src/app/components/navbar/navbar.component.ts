@@ -1,5 +1,5 @@
 // Angular core imports
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -37,8 +37,19 @@ export class NavbarComponent {
     { label: 'Register', route: 'register', requiresAuthentication: false },
     { label: 'Logout', requiresAuthentication: true, isLogout: true },
   ];
-
+  isScrolled = false; //controls the colors of navbar on scroll
   showNav = false; // Controls the visibility of the navbar
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
+    this.isScrolled = scrollPosition > 0;
+  }
 
   // Toggles the visibility of the navigation menu
   toggleNav(): void {
