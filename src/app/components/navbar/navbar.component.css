@@ -26,6 +26,7 @@
 }
 
 .logo-container {
+  transform: scale(1.1);
   margin-left: 1rem;
 }
 
@@ -71,10 +72,14 @@
 
 .menu > li a:hover {
   color: var(--secondary-color);
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .navbar.scrolled .menu > li a:hover {
   color: var(--secondary-color);
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .menu-button-container {
@@ -190,6 +195,8 @@
 
   .navbar.scrolled .menu > li a:hover {
     color: var(--secondary-color);
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
   }
 
   .menu > li:not(:last-child) {
