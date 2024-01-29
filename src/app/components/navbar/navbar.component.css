@@ -58,6 +58,10 @@
   color: var(--secondary-color);
 }
 
+.navbar.scrolled .menu li.active-link a {
+  color: var(--secondary-color);
+}
+
 .menu > li a {
   color: var(--text-color);
   text-decoration: none;
@@ -66,6 +70,10 @@
 }
 
 .menu > li a:hover {
+  color: var(--secondary-color);
+}
+
+.navbar.scrolled .menu > li a:hover {
   color: var(--secondary-color);
 }
 
