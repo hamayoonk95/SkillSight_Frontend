@@ -110,6 +110,12 @@
   background-color: var(--secondary-color);
 }
 
+.navbar.scrolled .menu-button-container:hover .menu-button,
+.navbar.scrolled .menu-button-container:hover .menu-button::before,
+.navbar.scrolled .menu-button-container:hover .menu-button::after {
+  background-color: var(--secondary-color);
+}
+
 .navbar.scrolled .menu-button,
 .navbar.scrolled .menu-button::before,
 .navbar.scrolled .menu-button::after {
