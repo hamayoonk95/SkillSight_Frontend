@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './services/auth-service/auth.guard';
 import { SkillGapComponent } from './pages/skill-gap/skill-gap.component';
 import { SkillGapVisualisationComponent } from './components/skill-gap-visualisation/skill-gap-visualisation.component';
+import { RoleProfilingComponent } from './pages/role-profiling/role-profiling.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     path: 'skill-gap-visualisation',
     component: SkillGapVisualisationComponent,
   },
+  { path: 'role-profiler', component: RoleProfilingComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
 ];

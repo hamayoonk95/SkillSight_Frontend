@@ -1,3 +1,4 @@
+/* Host Container Styles */
 :host {
   width: 100%;
   position: fixed;
@@ -5,6 +6,7 @@
   z-index: 1000;
 }
 
+/* Navbar Styling */
 .navbar {
   display: flex;
   flex-direction: row;
@@ -16,29 +18,35 @@
   transition: background-color 0.3s;
 }
 
+/* Navbar Color Change on Scroll */
 .navbar.scrolled {
   background-color: var(--primary-color);
 }
 
+/* Navbar Link and Logo Color on Scroll */
 .navbar.scrolled .menu > li a,
 .navbar.scrolled .logo {
   color: var(--background-color);
 }
 
+/* Logo Container Styling */
 .logo-container {
   transform: scale(1.1);
   margin-left: 1rem;
 }
 
+/* Logo Styling */
 .logo {
   width: 100px;
   height: 100px;
 }
 
+/* White Filter for Logo */
 .filter-white {
   filter: brightness(0) invert(1);
 }
 
+/* Menu Styling */
 .menu {
   display: flex;
   flex-direction: row;
@@ -48,6 +56,7 @@
   z-index: 10;
 }
 
+/* Menu Item Styling */
 .menu > li {
   margin: 0 1rem;
   overflow: hidden;
@@ -55,14 +64,13 @@
   transition: background-color 0.3s;
 }
 
-.menu li.active-link a {
-  color: var(--secondary-color);
-}
-
+/* Active Link Styling */
+.menu li.active-link a,
 .navbar.scrolled .menu li.active-link a {
   color: var(--secondary-color);
 }
 
+/* Menu Link Styling */
 .menu > li a {
   color: var(--text-color);
   text-decoration: none;
@@ -70,18 +78,15 @@
   transition: color 400ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.menu > li a:hover {
-  color: var(--secondary-color);
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
-}
-
+/* Menu Link Hover Effect */
+.menu > li a:hover,
 .navbar.scrolled .menu > li a:hover {
   color: var(--secondary-color);
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
 }
 
+/* Mobile Menu Button Container */
 .menu-button-container {
   display: none;
   height: 100%;
@@ -92,10 +97,12 @@
   align-items: center;
 }
 
+/* Mobile Menu Toggle Button */
 #menu-toggle {
   display: none;
 }
 
+/* Mobile Menu Button Styling */
 .menu-button,
 .menu-button::before,
 .menu-button::after {
@@ -109,24 +116,24 @@
   border-radius: 2px;
 }
 
+/* Hover Effect for Mobile Menu Button */
 .menu-button-container:hover .menu-button,
 .menu-button-container:hover .menu-button::before,
-.menu-button-container:hover .menu-button::after {
-  background-color: var(--secondary-color);
-}
-
+.menu-button-container:hover .menu-button::after,
 .navbar.scrolled .menu-button-container:hover .menu-button,
 .navbar.scrolled .menu-button-container:hover .menu-button::before,
 .navbar.scrolled .menu-button-container:hover .menu-button::after {
   background-color: var(--secondary-color);
 }
 
+/* Navbar Color for Mobile Menu Button on Scroll */
 .navbar.scrolled .menu-button,
 .navbar.scrolled .menu-button::before,
 .navbar.scrolled .menu-button::after {
   background-color: var(--background-color);
 }
 
+/* Mobile Menu Button Animation */
 .menu-button::before {
   content: "";
   margin-top: -8px;
@@ -137,6 +144,7 @@
   margin-top: 8px;
 }
 
+/* Mobile Menu Toggle State */
 #menu-toggle:checked + .menu-button-container .menu-button::before {
   margin-top: 0px;
   transform: rotate(405deg);
@@ -151,6 +159,7 @@
   transform: rotate(-405deg);
 }
 
+/* Responsive Styles for Mobile */
 @media (max-width: 1000px) {
   .menu-button-container {
     display: flex;
@@ -173,6 +182,7 @@
     border: 0;
     transition: height 200ms cubic-bezier(0.23, 1, 0.32, 1);
   }
+
   #menu-toggle:checked ~ .menu li {
     border: 1px solid var(--secondary-color);
     height: 2rem;
@@ -183,14 +193,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
+    /* margin: 0; */
     padding: 0.5em 0;
     width: 100%;
   }
 
   .navbar.scrolled .menu > li {
     background-color: rgba(31, 39, 71, 0.5);
-    color: var(--secondary-color);
   }
 
   .navbar.scrolled .menu > li a:hover {

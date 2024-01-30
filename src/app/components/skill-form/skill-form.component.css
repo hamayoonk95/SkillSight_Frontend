@@ -1,13 +1,4 @@
-app-skill-form {
-  width: 100%;
-  height: 100%;
-}
-
-.skill-form-container {
-  min-width: 100%;
-  min-height: 100%;
-}
-
+/* Skill Select Container Styling */
 .skill-select-container {
   margin-top: 0.5rem;
   display: flex;
@@ -16,15 +7,18 @@ app-skill-form {
   align-items: center;
 }
 
+/* Skill Select Element Styling */
 .skill-select {
   width: 90%;
   margin-bottom: 0;
 }
 
+/* Styling for Angular Material Vertical Content */
 ::ng-deep .mat-vertical-content {
   padding: 0 24px 0 24px !important;
 }
 
+/* Complete Button Container Styling */
 .complete-container {
   padding-bottom: 1rem;
   display: flex;

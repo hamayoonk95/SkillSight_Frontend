@@ -43,7 +43,7 @@ import { Role } from '../../services/job-roles-service/job-roles.service';
 })
 export class RegistrationComponent implements OnInit {
   personalDetailsGroup: FormGroup; // FormGroup for personal details
-  accountDetialsGroup: FormGroup; // FormGroup for account details
+  accountDetailsGroup: FormGroup; // FormGroup for account details
 
   constructor(
     private _formBuilder: FormBuilder, // FormBuilder for creating form groups
@@ -61,7 +61,7 @@ export class RegistrationComponent implements OnInit {
     });
 
     // Initialize the account details form group with validators
-    this.accountDetialsGroup = this._formBuilder.group({
+    this.accountDetailsGroup = this._formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(50)]],
       email: [
         '',
@@ -88,7 +88,7 @@ export class RegistrationComponent implements OnInit {
     }
 
     // Check for invalid input in account details form group.
-    if (this.accountDetialsGroup.invalid) {
+    if (this.accountDetailsGroup.invalid) {
       this.snackbarService.open(
         'Please correct the errors in your account details.',
         'error'
@@ -99,7 +99,7 @@ export class RegistrationComponent implements OnInit {
     // Combines values from both form groups into one object
     const userData: UserRegistrationData = {
       ...this.personalDetailsGroup.value,
-      ...this.accountDetialsGroup.value,
+      ...this.accountDetailsGroup.value,
     };
 
     // Attempts to register the user with the combined form data.

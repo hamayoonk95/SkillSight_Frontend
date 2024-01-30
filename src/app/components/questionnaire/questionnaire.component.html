@@ -1,0 +1,110 @@
+<!-- Questionnaire Form Container -->
+<div class="questionnaire-form">
+  <!-- Material Horizontal Stepper Component -->
+  <mat-horizontal-stepper linear #stepper class="stepper-container">
+    <!-- First Group - Personal Details -->
+    <mat-step [stepControl]="firstGroup">
+
+      <form [formGroup]="firstGroup" class="questionnaire-form-container">
+        <ng-template matStepLabel><label class="stepper-label">First Group</label></ng-template>
+
+        <div class="question-block">
+          <label class="question-label">Question 1: Preferred Work Environment</label>
+          <mat-radio-group formControlName="question1">
+            <mat-radio-button value="option1">I prefer working in a structured and predictable environment.</mat-radio-button>
+            <mat-radio-button value="option2">I thrive in dynamic and fast-paced settings.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="question-block">
+          <label class="question-label">Question 2: Approach to Problem Solving</label>
+          <mat-radio-group formControlName="question2">
+            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
+            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="question-block">
+          <label class="question-label">Question 2: Approach to Problem Solving</label>
+          <mat-radio-group formControlName="question3">
+            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
+            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="question-block">
+          <label class="question-label">Question 3: Approach to Problem Solving</label>
+          <mat-radio-group formControlName="question4">
+            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
+            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="question-block">
+          <label class="question-label">Question 4: Approach to Problem Solving</label>
+          <mat-radio-group formControlName="question5">
+            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
+            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="question-block">
+          <label class="question-label">Question 5: Approach to Problem Solving</label>
+          <mat-radio-group formControlName="question6">
+            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
+            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="buttons-container">
+          <button class="next-btn" mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+
+    </mat-step>
+
+    <!-- Second Group - Account Details -->
+    <mat-step [stepControl]="secondGroup">
+      <form [formGroup]="secondGroup" class="questionnaire-form-container">
+        <ng-template matStepLabel><label class="stepper-label">Second Group</label></ng-template>
+
+        <div class="question-block">
+          <label class="question-label">Question 7: Preferred Work Environment</label>
+          <mat-radio-group formControlName="question7">
+            <mat-radio-button value="option1">I prefer working in a structured and predictable environment.</mat-radio-button>
+            <mat-radio-button value="option2">I thrive in dynamic and fast-paced settings.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="question-block">
+          <label class="question-label">Question 8: Preferred Work Environment</label>
+          <mat-radio-group formControlName="question8">
+            <mat-radio-button value="option1">I prefer working in a structured and predictable environment.</mat-radio-button>
+            <mat-radio-button value="option2">I thrive in dynamic and fast-paced settings.</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </form>
+
+      <div class="buttons-container">
+        <button class="back-btn" mat-button matStepperPrevious>Back</button>
+        <button class="next-btn" mat-button matStepperNext>Next</button>
+      </div>
+
+    </mat-step>
+
+    <!-- Final Step -->
+    <mat-step>
+      <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
+
+      <div class="questionnaire-form-container">
+        <p>All Complete!</p>
+        <div class="buttons-container">
+          <button mat-button class="submit-btn">Submit</button>
+        </div>
+      </div>
+
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</div>

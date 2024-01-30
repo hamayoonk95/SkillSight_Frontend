@@ -1,17 +1,30 @@
+/* Import External Fonts and Angular Material Theme */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* Root Variable Definitions */
 :root {
-  --primary-color: #1f2747;
+  --primary-color: #333940;
   --primary-color-rgb: rgb(31, 39, 71);
-  --secondary-color: #ff8a00;
-  --accent-color: #673ab7;
+  --secondary-color: #ffcc33;
+  --accent-color: #4a90e2;
   --background-color: #f5f5f5;
+  --background-secondary: #e0e0e0;
+  --white-color: #fff;
   --text-color: #333333;
   --success-color: #4caf50;
   --warning-color: #f44336;
+
+  /* Button colors */
+  --button-bg-color: #008cba;
+  --button-bg-hover: #005f6b;
+  --button-next-bg-color: #4caf50;
+  --button-next-bg-hover: #45a049;
+  --button-back-bg-color: #f44336;
+  --button-back-bg-hover: #da190b;
 }
 
+/* Global Body Styles */
 body {
   font-family: "Roboto", sans-serif;
   background-image: url("./assets/background.svg");
@@ -28,19 +41,30 @@ body {
   padding: 0;
 }
 
+h1 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1.3rem;
+}
+
 /* Snack Bar Styling */
 .snack-bar {
   margin-top: 90px !important;
 }
 
+/* Snack Bar Action Button Styling */
 .mat-mdc-snack-bar-actions > button {
   color: #fff !important;
 }
 
+/* Success Snack Bar Color */
 .snack-bar-success {
   --mdc-snackbar-container-color: var(--success-color);
 }
 
+/* Success Snack Bar Color */
 .snack-bar-error {
   --mdc-snackbar-container-color: var(--warning-color);
 }

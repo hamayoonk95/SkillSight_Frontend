@@ -42,7 +42,7 @@ export class SkillGapComponent implements OnInit {
   onRoleSelected(selectedRole: Role): void {
     if (!this.selectedRole || this.selectedRole.id !== selectedRole.id) {
       this.selectedRole = selectedRole;
-      this.resetSkillForm(); // Add this line
+      this.resetSkillForm();
       this.fetchSkillsForSelectedRole(this.selectedRole.id);
     }
   }

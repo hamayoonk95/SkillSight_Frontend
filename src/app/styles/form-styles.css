@@ -1,15 +1,6 @@
+/* Form Layout Styles */
 .login-form,
-.registration-form {
-  display: flex;
-  justify-content: center;
-}
-
-.stepper-container {
-  width: 100%;
-  max-width: 60%;
-  height: 100%;
-}
-
+.registration-form,
 .form-container {
   display: flex;
   flex-direction: column;
@@ -17,11 +8,26 @@
   align-items: center;
 }
 
+/* Stepper Container Styles */
+.stepper-container {
+  width: 100%;
+  max-width: 60%;
+  height: 100%;
+}
+
+@media (max-width: 600px) {
+  .stepper-container {
+    max-width: 80%;
+  }
+}
+
+/* Form Field Styles */
 mat-form-field {
   width: 80%;
   margin-bottom: 10px;
 }
 
+/* Button Container Styles */
 .buttons-container {
   width: 80%;
   display: flex;
@@ -32,37 +38,39 @@ mat-form-field {
   transition: background-color 0.3s ease-in-out, transform 0.3s ease;
 }
 
+/* Button Styles */
+.next-btn,
+.back-btn,
+.submit-btn {
+  transition: background-color 0.3s ease-in-out;
+}
+
 .next-btn {
-  background-color: #4caf50;
+  background-color: var(--button-next-bg-color);
 }
 
 .next-btn:hover {
-  background-color: #45a049;
+  background-color: var(--button-next-bg-hover);
 }
 
 .back-btn {
-  background-color: #f44336;
+  background-color: var(--button-back-bg-color);
 }
 
 .back-btn:hover {
-  background-color: #da190b;
+  background-color: var(--button-back-bg-hover);
 }
 
 .submit-btn {
-  background-color: #008cba;
+  background-color: var(--button-bg-color);
 }
 
 .submit-btn:hover {
-  background-color: #005f6b;
+  background-color: var(--button-bg-hover);
 }
 
+/* Responsive Stepper Styles */
 @media (max-width: 600px) {
-  .stepper-container {
-    width: 100%;
-    max-width: 80%;
-    height: 100%;
-  }
-
   .stepper-label {
     font-size: 10px;
   }

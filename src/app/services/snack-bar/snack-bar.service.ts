@@ -36,7 +36,7 @@ export class SnackbarService {
 
     // Define default configuration for the snack-bar
     const defaultConfig = {
-      duration: 10000000,
+      duration: 2000,
       verticalPosition: 'top',
       panelClass,
       ...config,

@@ -31,7 +31,7 @@ export class NavbarComponent {
     { label: 'Dashboard', route: '', isVisible: true },
     { label: 'About', route: 'about', isVisible: true },
     { label: 'Gap Analysis', route: 'skill-gap', isVisible: true },
-    { label: 'Role Profiling', route: 'role-profile', isVisible: true },
+    { label: 'Role Profiling', route: 'role-profiler', isVisible: true },
     { label: 'Colab Hub', route: 'colab-hub', isVisible: true },
     { label: 'Login', route: 'login', requiresAuthentication: false },
     { label: 'Register', route: 'register', requiresAuthentication: false },

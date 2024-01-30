@@ -1,0 +1,47 @@
+/* Host Container Styling */
+:host {
+  margin-top: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+/* Questionnaire Form Container Styling */
+.questionnaire-form-container {
+  padding: 1rem;
+}
+
+/* Stepper Container Styling */
+.stepper-container {
+  margin: auto;
+  width: 90%;
+  max-width: 100%;
+}
+
+/* Question Block Styling */
+.question-block {
+  margin-bottom: 15px;
+}
+
+/* Question Label Styling */
+.question-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Radio Group Styling */
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+/* Individual Radio Button Styling */
+.mat-radio-button {
+  margin-bottom: 5px;
+}
+
+/* Button Container Styling */
+.buttons-container {
+  width: 100%;
+}
