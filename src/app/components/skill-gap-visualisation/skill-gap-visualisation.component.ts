@@ -1,11 +1,21 @@
+// Angular Core Imports
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
+// Angular Material imports
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 
+// Inteface for skills by category
+import { SkillsByCategory } from '../../services/role-skills-service/role-skills.service';
+import { CategoryStat, SkillGap } from './skill-gap.interface';
+
+/**
+ * SkillGapVisualisationComponent displays the skill gap analysis for the selected role.
+ */
 @Component({
   selector: 'app-skill-gap-visualisation',
   standalone: true,
@@ -21,18 +31,21 @@ import { MatChipsModule } from '@angular/material/chips';
   styleUrl: './skill-gap-visualisation.component.css',
 })
 export class SkillGapVisualisationComponent implements OnInit {
-  skillsGap: any;
+  // Data for skill gap analysis
+  skillsGap: SkillGap;
   categories: string[];
-  skillsForSelectedRole: any;
-  categoryStats: any[] = [];
+  skillsForSelectedRole: SkillsByCategory;
+  // Statistics for each category
+  categoryStats: CategoryStat[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      // Retrieve the state
+      // Retrieve the state passed from the previous component
       const state = window.history.state;
 
+      // Initialise component data if state is available
       if (state.skillsGap && state.categories && state.skillsForSelectedRole) {
         this.skillsGap = state.skillsGap;
         this.categories = state.categories;
@@ -42,6 +55,7 @@ export class SkillGapVisualisationComponent implements OnInit {
     });
   }
 
+  // Generate statistics for each category based on the skill gap data
   generateCategoryStats() {
     this.categoryStats = this.categories.map((category) => {
       const totalSkills = this.skillsForSelectedRole[category].length;
@@ -59,7 +73,8 @@ export class SkillGapVisualisationComponent implements OnInit {
     });
   }
 
-  isSkillMissing(stat: any, skill: any): boolean {
+  // Determines if a skill is missing in a given category
+  isSkillMissing(stat: CategoryStat, skill: any): boolean {
     return stat.missingSkills.includes(skill.skill.skillName);
   }
 }

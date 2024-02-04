@@ -1,25 +1,38 @@
+<!-- Skill Gap Visualisation Container -->
 <div class="accordion-wrapper">
 
+  <!-- Skill Gap Analysis Heading -->
   <h2 class="skill-gap-heading">Your Skill Gap Analysis</h2>
 
+  <!-- Accordion for Each Category -->
   <mat-accordion multi="true" *ngIf="categoryStats.length">
+
+    <!-- Expansion Panels for Each Category -->
     <mat-expansion-panel *ngFor="let stat of categoryStats let i = index" [expanded]="i === 0">
+
+      <!-- Expansion Panel Header -->
       <mat-expansion-panel-header>
         <div class="header-content">
+          <!-- Category Name -->
           <div class="category-name">
             {{ stat.categoryName }}
           </div>
+          <!-- Progress Bar for Skills Known -->
           <div class="progress-bar-container">
             <mat-progress-bar mode="determinate" [value]="stat.progressPercentage" color="primary">
             </mat-progress-bar>
+            <!-- Text Displaying Number of Known Skills -->
             <span class="progress-text">
               {{ stat.knownSkills }}/
               {{ stat.totalSkills }}</span>
           </div>
         </div>
+
       </mat-expansion-panel-header>
 
+      <!-- Known Skills Section -->
       <ng-container *ngIf="stat.knownSkills > 0">
+        <!-- Chips for Known Skills -->
         <div class="skills-chips">
           <h3>Known Skills</h3>
           <mat-chip-set>
@@ -32,9 +45,11 @@
         </div>
       </ng-container>
 
+      <!-- Skills to Improve Section -->
       <ng-container *ngIf="stat.missingSkills.length > 0">
         <div class="skills-chips">
           <h3>Skills to Improve</h3>
+          <!-- Chips for Missing Skills -->
           <mat-chip-set>
             <ng-container *ngFor="let skill of skillsForSelectedRole[stat.categoryName]">
               <mat-chip *ngIf="isSkillMissing(stat, skill)" selectable="false" class="missing-skill">

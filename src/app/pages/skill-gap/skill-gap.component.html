@@ -3,6 +3,7 @@
   <!-- Role selection component to choose a role -->
   <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
 
+  <!-- Skill Form Component - Passes the loaded skills data to the Skill Form Component -->
   <app-skill-form *ngIf="allSkillsLoaded" [skillsForSelectedRole]="skillsForSelectedRole"></app-skill-form>
 
 </div>

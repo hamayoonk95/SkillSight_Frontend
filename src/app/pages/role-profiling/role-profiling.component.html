@@ -1,1 +1,3 @@
-<app-questionnaire></app-questionnaire>
+<app-questionnaire *ngIf="!matchedRoleData" (roleMatched)="onRoleMatched($event)"></app-questionnaire>
+
+<app-role-roadmap *ngIf="matchedRoleData" [roleData]="matchedRoleData"></app-role-roadmap>

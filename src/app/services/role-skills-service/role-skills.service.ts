@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// RxJS imports
+// RxJS import
 import { Observable } from 'rxjs';
 
 // Environment import
@@ -14,6 +14,10 @@ export interface SkillResponse {
     skillName: string;
   };
   frequency: number;
+}
+
+export interface SkillsByCategory {
+  [category: string]: SkillResponse[];
 }
 
 /**
@@ -33,7 +37,10 @@ export class SkillsService {
    * @param category - The category of skills to fetch.
    * @returns An Observable containing an array of SkillResponse.
    */
-  getSkillsForRole(roleId: number, category?: string | null): Observable<SkillResponse[]> {
+  getSkillsForRole(
+    roleId: number,
+    category?: string | null
+  ): Observable<SkillResponse[]> {
     const url = `${this.apiUrl}/${roleId}/skills/${category}`;
     return this.http.get<SkillResponse[]>(url);
   }

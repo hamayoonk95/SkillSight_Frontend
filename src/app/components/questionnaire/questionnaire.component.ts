@@ -1,7 +1,6 @@
 // Angular core imports
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -16,44 +15,71 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 
+// Importing custom services and data.
+import { RoleMatchService } from '../../services/role-match-service/role-match.service';
+import { questionnaireData } from './questionnaire-data';
+
+// Interface for matched role data
+import { MatchedRoleData } from '../../services/role-match-service/role-profiling.interface';
+
+/**
+ * Component for rendering and handling a dynamic questionnaire form.
+ * Emits the matched role data upon form submission.
+ */
 @Component({
   selector: 'app-questionnaire',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatStepperModule,
     MatInputModule,
     MatSelectModule,
-    RouterModule,
     MatRadioModule,
   ],
   templateUrl: './questionnaire.component.html',
   styleUrls: ['../../styles/form-styles.css', './questionnaire.component.css'],
 })
 export class QuestionnaireComponent implements OnInit {
-  firstGroup: FormGroup; // FormGroup for personal details
-  secondGroup: FormGroup; // FormGroup for account details
+  questionnaireData = questionnaireData; // Data for rendering questionnaire
+  questionnaireForm: FormGroup; // FormGroup to manage questionnaire form
+  @Output() roleMatched = new EventEmitter<MatchedRoleData>(); // Event emitter for matched role data
 
   constructor(
     private _formBuilder: FormBuilder, // FormBuilder for creating form groups
-    private router: Router // Router for navigation
+    private roleMatchService: RoleMatchService // RoleMatchService to post data to API
   ) {}
 
+  /**
+   * Initializes the questionnaire form with dynamic form controls based on questionnaire data.
+   */
   ngOnInit(): void {
-    this.firstGroup = this._formBuilder.group({
-      question1: [''],
-      question2: [''],
-      question3: [''],
-      question4: [''],
-      question5: [''],
-      question6: [''],
-    });
+    // Constructing form controls dynamically based on questionnaire data
+    const formControls = this.questionnaireData.reduce((groupAcc, group) => {
+      const controls = group.questions.reduce((questionAcc, question) => {
+        questionAcc[question.formControlName] = ['', Validators.required];
+        return questionAcc;
+      }, {});
 
-    this.secondGroup = this._formBuilder.group({
-      question7: [''],
-      question8: [''],
-      // question5: [''],
-    });
+      return { ...groupAcc, ...controls };
+    }, {});
+
+    this.questionnaireForm = this._formBuilder.group(formControls);
+  }
+
+  /**
+   * Submits the questionnaire form and emits the matched role data.
+   */
+  submitQuestionnaire() {
+    const answers = this.questionnaireForm.value;
+
+    // Fetching matched role data based on form answers
+    this.roleMatchService
+      .matchRoles(answers)
+      .subscribe((matchedRole: MatchedRoleData) => {
+        // Emitting matched role data
+        this.roleMatched.emit(matchedRole);
+      });
   }
 }

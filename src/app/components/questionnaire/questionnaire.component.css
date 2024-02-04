@@ -17,15 +17,20 @@
   max-width: 100%;
 }
 
-/* Question Block Styling */
-.question-block {
-  margin-bottom: 15px;
+/* Styling for Angular Material Vertical Content */
+::ng-deep .mat-vertical-content {
+  padding: 24px 24px 24px 24px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Question Label Styling */
 .question-label {
   display: block;
   font-weight: bold;
+  font-size: 22px;
   margin-bottom: 5px;
 }
 
@@ -34,11 +39,13 @@ mat-radio-group {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
 }
 
-/* Individual Radio Button Styling */
-.mat-radio-button {
-  margin-bottom: 5px;
+mat-radio-button {
+  display: block;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 /* Button Container Styling */

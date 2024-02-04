@@ -16,6 +16,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 
+
+import { SkillsByCategory } from '../../services/role-skills-service/role-skills.service';
+
+/**
+ * SkillFormComponent is responsible for displaying and handling a dynamic form
+ * for skill selection based on the selected role. It also calculates the skill gap
+ * and navigates to the skill gap visualisation component.
+ */
 @Component({
   selector: 'app-skill-form',
   standalone: true,
@@ -31,9 +39,8 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './skill-form.component.html',
   styleUrls: ['./skill-form.component.css', '../../styles/form-styles.css'],
 })
-export class SkillFormComponent implements OnInit {
-  @Input() skillsForSelectedRole: any; // Skills data input from parent component
-  // @Output() skillsSubmitted = new EventEmitter<any>();
+export class SkillFormComponent {
+  @Input() skillsForSelectedRole: SkillsByCategory; // Skills data input from parent component
   skillFormGroup: FormGroup; // Form group for all skills
   categoryKeys: string[] = []; // Array of category names
   controlNames: string[] = []; // Array of form control names
@@ -50,15 +57,15 @@ export class SkillFormComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
-
   /**
    * Initializes the form controls based on the skills for the selected role.
    */
   initializeForm(): void {
+    // Resetting form options and categories
     this.skillsOptions = {};
     this.categoryKeys = Object.keys(this.skillsForSelectedRole);
 
+    // Creating form controls for each skill category
     this.categoryKeys.forEach((category) => {
       this.skillsOptions[category] = this.skillsForSelectedRole[category].map(
         (skill) => skill.skill.skillName
@@ -102,13 +109,20 @@ export class SkillFormComponent implements OnInit {
     return parts.join(' ').replace(/_/g, ' '); // Replace underscores with spaces
   }
 
+  /**
+   * Submits the selected skills and calculates the skill gap.
+   */
   submitSkills() {
+    // Retrieving selected skills from the form
     const selectedSKills = this.skillFormGroup.value;
+
+    // Calculating the skill gap
     const skillsGap = this.calculateSkillsGap(
       selectedSKills,
       this.skillsForSelectedRole
     );
 
+    // Navigating to the skill gap visualisation with calculated data
     this.router.navigate(['/skill-gap-visualisation'], {
       state: {
         skillsGap,
@@ -118,8 +132,16 @@ export class SkillFormComponent implements OnInit {
     });
   }
 
-  calculateSkillsGap(selectedSkills: any, skillsForSelectedRole: any): any {
+  /**
+   * Calculates the skills gap based on selected skills and required skills for the role.
+   * @param selectedSkills The skills selected by the user.
+   * @param skillsForSelectedRole The required skills for the selected role.
+   * @returns An object representing the skills gap.
+   */
+  calculateSkillsGap(selectedSkills: SkillsByCategory, skillsForSelectedRole: any): SkillsByCategory {
     let skillsGap = {};
+
+    // Looping through each category to find missing skills
     this.categoryKeys.forEach((category) => {
       const requiredSkills = skillsForSelectedRole[category].map(
         (skill) => skill.skill.skillName
@@ -128,6 +150,8 @@ export class SkillFormComponent implements OnInit {
       const missingSkills = requiredSkills.filter(
         (skill) => !selectedCategorySkills.includes(skill)
       );
+
+      // Adding missing skills to the skills gap if any
       if (missingSkills.length > 0) {
         skillsGap[category] = missingSkills;
       }
