@@ -1,108 +1,54 @@
-<!-- Questionnaire Form Container -->
+<!-- Container for the questionnaire form -->
 <div class="questionnaire-form">
   <!-- Material Horizontal Stepper Component -->
-  <mat-horizontal-stepper linear #stepper class="stepper-container">
-    <!-- First Group - Personal Details -->
-    <mat-step [stepControl]="firstGroup">
+  <mat-horizontal-stepper orientation="vertical" linear #stepper class="stepper-container">
 
-      <form [formGroup]="firstGroup" class="questionnaire-form-container">
-        <ng-template matStepLabel><label class="stepper-label">First Group</label></ng-template>
+    <!-- Dynamic form creation based on questionnaire data -->
+    <form [formGroup]="questionnaireForm" class="questionnaire-form-container">
+      <!-- Loop through each group of questions -->
+      <mat-step *ngFor="let group of questionnaireData; let i = index">
 
-        <div class="question-block">
-          <label class="question-label">Question 1: Preferred Work Environment</label>
-          <mat-radio-group formControlName="question1">
-            <mat-radio-button value="option1">I prefer working in a structured and predictable environment.</mat-radio-button>
-            <mat-radio-button value="option2">I thrive in dynamic and fast-paced settings.</mat-radio-button>
+        <!-- Step label -->
+        <ng-template matStepLabel><label class="stepper-label">
+            {{ group.stepLabel }}</label></ng-template>
+
+        <!-- Loop through each question in the group -->
+        <div *ngFor="let question of group.questions" class="question-block">
+
+          <!-- Question label -->
+          <label class="question-label">
+            {{ question.label }}</label>
+
+          <!-- Radio group for question options -->
+          <mat-radio-group [formControlName]="question.formControlName">
+            <mat-radio-button *ngFor="let option of question.options" [value]="option.value">
+              {{ option.display }}
+            </mat-radio-button>
           </mat-radio-group>
+
         </div>
 
-        <div class="question-block">
-          <label class="question-label">Question 2: Approach to Problem Solving</label>
-          <mat-radio-group formControlName="question2">
-            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
-            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="question-block">
-          <label class="question-label">Question 2: Approach to Problem Solving</label>
-          <mat-radio-group formControlName="question3">
-            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
-            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="question-block">
-          <label class="question-label">Question 3: Approach to Problem Solving</label>
-          <mat-radio-group formControlName="question4">
-            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
-            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="question-block">
-          <label class="question-label">Question 4: Approach to Problem Solving</label>
-          <mat-radio-group formControlName="question5">
-            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
-            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="question-block">
-          <label class="question-label">Question 5: Approach to Problem Solving</label>
-          <mat-radio-group formControlName="question6">
-            <mat-radio-button value="option1">I like to tackle problems with a creative and innovative approach.</mat-radio-button>
-            <mat-radio-button value="option2">I prefer using established methods and strategies to solve problems.</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
+        <!-- Navigation buttons for the stepper -->
         <div class="buttons-container">
-          <button class="next-btn" mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-
-    </mat-step>
-
-    <!-- Second Group - Account Details -->
-    <mat-step [stepControl]="secondGroup">
-      <form [formGroup]="secondGroup" class="questionnaire-form-container">
-        <ng-template matStepLabel><label class="stepper-label">Second Group</label></ng-template>
-
-        <div class="question-block">
-          <label class="question-label">Question 7: Preferred Work Environment</label>
-          <mat-radio-group formControlName="question7">
-            <mat-radio-button value="option1">I prefer working in a structured and predictable environment.</mat-radio-button>
-            <mat-radio-button value="option2">I thrive in dynamic and fast-paced settings.</mat-radio-button>
-          </mat-radio-group>
+          <button *ngIf="i > 0" mat-button class="back-btn" (click)="stepper.previous()">Back</button>
+          <button *ngIf="i < questionnaireData.length" mat-button class="next-btn" (click)="stepper.next()">Next</button>
         </div>
 
-        <div class="question-block">
-          <label class="question-label">Question 8: Preferred Work Environment</label>
-          <mat-radio-group formControlName="question8">
-            <mat-radio-button value="option1">I prefer working in a structured and predictable environment.</mat-radio-button>
-            <mat-radio-button value="option2">I thrive in dynamic and fast-paced settings.</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </form>
-
-      <div class="buttons-container">
-        <button class="back-btn" mat-button matStepperPrevious>Back</button>
-        <button class="next-btn" mat-button matStepperNext>Next</button>
-      </div>
-
-    </mat-step>
+      </mat-step>
+    </form>
 
     <!-- Final Step -->
     <mat-step>
       <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
 
-      <div class="questionnaire-form-container">
+      <div>
         <p>All Complete!</p>
+
+        <!-- Submit button -->
         <div class="buttons-container">
-          <button mat-button class="submit-btn">Submit</button>
+          <button mat-button class="submit-btn" (click)="submitQuestionnaire()">Submit</button>
         </div>
       </div>
-
     </mat-step>
 
   </mat-horizontal-stepper>

@@ -1,32 +1,51 @@
+<!-- Skill Form Container -->
 <div class="skill-form-container">
+
+  <!-- Dynamic form for skill selection -->
   <form (ngSubmit)="submitSkills()" [formGroup]="skillFormGroup" class="form-container1">
+
+    <!-- Material Stepper for navigating through skill categories -->
     <mat-horizontal-stepper orientation="vertical" linear #stepper class="stepper-container1">
+
+      <!-- Loop through skill categories and display options -->
       <mat-step *ngFor="let category of categoryKeys" [stepControl]="skillFormGroup" class="category-step">
+
+        <!-- Step label displaying the category name -->
         <ng-template matStepLabel>
           <label class="stepper-label1">{{category}}</label>
         </ng-template>
+
+        <!-- Skill selection dropdown for the current category -->
         <div class="skill-select-container">
+
           <mat-form-field appearance="fill" class="skill-select">
             <mat-label>Select
               {{ category }} Skills
             </mat-label>
+            <!-- Multiple select dropdown with options for each skill in the category -->
             <mat-select [formControlName]="category" multiple>
               <mat-option *ngFor="let skill of skillsOptions[category]" [value]="skill">
                 {{ skill }}
               </mat-option>
             </mat-select>
+
           </mat-form-field>
+
+          <!-- Button to navigate to the next step -->
           <div class="buttons-container">
             <button type="button" class="next-btn" mat-button matStepperNext>Next</button>
           </div>
         </div>
+
       </mat-step>
+
       <!-- Final Step: Complete -->
       <mat-step class="complete-step">
         <ng-template matStepLabel><label class="stepper-label">Complete</label></ng-template>
         <div class="complete-container">
           <p>All Complete!</p>
           <div class="buttons-container">
+            <!-- Submit button to finalize skill selection -->
             <button type="submit" class="submit-btn" mat-button>Submit</button>
           </div>
         </div>

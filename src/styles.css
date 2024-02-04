@@ -1,6 +1,6 @@
 /* Import External Fonts and Angular Material Theme */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "@angular/material/prebuilt-themes/indigo-pink.css"; */
 
 /* Root Variable Definitions */
 :root {
