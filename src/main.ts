@@ -1,5 +1,5 @@
 // Angular core imports
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 // Routes import
-import { routes } from './app/app.routes';
+import { routes, routerOptions } from './app/app.routes';
 
 // App imports
 import { AppComponent } from './app/app.component';
@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     JwtHelperService,
     // Registering application routes
-    importProvidersFrom(RouterModule.forRoot(routes)),
+    importProvidersFrom(RouterModule.forRoot(routes, routerOptions)),
     // Registering other required modules
     importProvidersFrom(HttpClientModule),
     importProvidersFrom(BrowserAnimationsModule),

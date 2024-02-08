@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 // Importing child components
 import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
-import { RoleRoadmapComponent } from '../../components/role-roadmap/role-roadmap.component';
 
 // Interface for Matched role data
 import { MatchedRoleData } from '../../services/role-match-service/role-profiling.interface';
@@ -16,7 +15,7 @@ import { MatchedRoleData } from '../../services/role-match-service/role-profilin
 @Component({
   selector: 'app-role-profiling',
   standalone: true,
-  imports: [CommonModule, QuestionnaireComponent, RoleRoadmapComponent],
+  imports: [CommonModule, QuestionnaireComponent],
   templateUrl: './role-profiling.component.html',
   styleUrl: './role-profiling.component.css',
 })
