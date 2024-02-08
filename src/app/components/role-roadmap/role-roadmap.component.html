@@ -1,5 +1,25 @@
-<p>role-roadmap works!</p>
+<div *ngIf="roleData" class="role-section">
+  <h2 class="role-title">{{roleData.role}}</h2>
+  <p>Description</p>
+</div>
 
-<div *ngIf="roleData">
-  <h3>{{roleData.role}}</h3>
+<div class="roadmap-section">
+  <h2>Roadmap</h2>
+  <div *ngIf="roleData" class="timeline">
+
+    <div *ngFor="let skillCategory of roleData.topSkills; let i = index" class="container" [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}" [ngStyle]="{'--circle-border-color': skillCategory.circleColor}">
+
+      <h4 class="category-header" [ngStyle]="{'background-color': skillCategory.headerColor}">
+        {{ skillCategory.category }}
+      </h4>
+      <div class="content">
+        <ul>
+          <li *ngFor="let skill of skillCategory.skills">
+            {{ skill.skillName }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </div>

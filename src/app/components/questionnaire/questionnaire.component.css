@@ -1,7 +1,8 @@
 /* Host Container Styling */
 :host {
+  display: flex;
+  justify-content: center;
   margin-top: 1rem;
-  width: 100%;
   margin-bottom: 2rem;
 }
 
@@ -12,9 +13,20 @@
 
 /* Stepper Container Styling */
 .stepper-container {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   margin: auto;
-  width: 90%;
-  max-width: 100%;
+  max-width: 90%;
+}
+
+::ng-deep .mat-step .mat-step-header {
+  cursor: pointer;
+  background-color: var(--background-color) !important;
+}
+
+::ng-deep .mat-step-header:hover[aria-disabled="true"],
+.mat-step-header:hover[aria-disabled="false"] {
+  cursor: pointer !important;
 }
 
 /* Styling for Angular Material Vertical Content */
@@ -48,7 +60,13 @@ mat-radio-button {
   border-bottom: 1px solid #e0e0e0;
 }
 
+/* Remove bottom border for the last mat-radio-button */
+mat-radio-group mat-radio-button:last-child {
+  border-bottom: none;
+}
+
 /* Button Container Styling */
 .buttons-container {
+  margin-top: 1.5rem;
   width: 100%;
 }

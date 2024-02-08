@@ -1,6 +1,7 @@
 // Angular core imports
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -21,6 +22,7 @@ import { questionnaireData } from './questionnaire-data';
 
 // Interface for matched role data
 import { MatchedRoleData } from '../../services/role-match-service/role-profiling.interface';
+import { SnackbarService } from '../../services/snack-bar/snack-bar.service';
 
 /**
  * Component for rendering and handling a dynamic questionnaire form.
@@ -44,11 +46,12 @@ import { MatchedRoleData } from '../../services/role-match-service/role-profilin
 export class QuestionnaireComponent implements OnInit {
   questionnaireData = questionnaireData; // Data for rendering questionnaire
   questionnaireForm: FormGroup; // FormGroup to manage questionnaire form
-  @Output() roleMatched = new EventEmitter<MatchedRoleData>(); // Event emitter for matched role data
 
   constructor(
     private _formBuilder: FormBuilder, // FormBuilder for creating form groups
-    private roleMatchService: RoleMatchService // RoleMatchService to post data to API
+    private roleMatchService: RoleMatchService, // RoleMatchService to post data to API
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {}
 
   /**
@@ -72,14 +75,17 @@ export class QuestionnaireComponent implements OnInit {
    * Submits the questionnaire form and emits the matched role data.
    */
   submitQuestionnaire() {
-    const answers = this.questionnaireForm.value;
+    if (this.questionnaireForm.valid) {
+      const answers = this.questionnaireForm.value;
 
-    // Fetching matched role data based on form answers
-    this.roleMatchService
-      .matchRoles(answers)
-      .subscribe((matchedRole: MatchedRoleData) => {
-        // Emitting matched role data
-        this.roleMatched.emit(matchedRole);
-      });
+      // Fetching matched role data based on form answers
+      this.roleMatchService
+        .matchRoles(answers)
+        .subscribe((matchedRole: MatchedRoleData) => {
+          this.router.navigate(['/role-roadmap'], { state: { matchedRole } });
+        });
+    } else {
+      this.snackbarService.open(`You're missing some questions`, 'error');
+    }
   }
 }
