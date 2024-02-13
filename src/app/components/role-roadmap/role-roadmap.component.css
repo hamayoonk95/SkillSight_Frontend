@@ -1,17 +1,48 @@
 /* Component Scoped Styles */
 :host {
-  display: block;
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
+  margin: 1rem 0;
 }
 
-.role-section,
-.roadmap-section h2 {
+.role-roadmap-section {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+}
+
+.header-info {
+  margin: 1rem 0 0 0;
+}
+
+h2 {
+  margin-top: 0.5rem;
   font-size: 2rem;
 }
 
+mat-panel-title {
+  letter-spacing: 1px;
+  color: var(--accent-color);
+}
+
+.mat-expansion-panel-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: var(--background-color);
+  border-bottom: 1px solid #ddd;
+}
+
+.mat-expansion-panel p {
+  font-size: 1rem;
+}
+
+.mat-expansion-panel ul {
+  list-style: square;
+  text-align: left;
+}
+
+/* ROADMAP SECTION */
 .category-header {
   text-align: center;
   padding: 1rem;

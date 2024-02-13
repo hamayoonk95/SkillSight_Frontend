@@ -1,25 +1,79 @@
-<div *ngIf="roleData" class="role-section">
-  <h2 class="role-title">{{roleData.role}}</h2>
-  <p>Description</p>
-</div>
+<div *ngIf="roleData" class="role-roadmap-section">
+  <p class="header-info">Considering your answers, you might excel as a:</p>
+  <h2>{{roleData.role}}</h2>
 
-<div class="roadmap-section">
-  <h2>Roadmap</h2>
-  <div *ngIf="roleData" class="timeline">
+  <mat-accordion class="role-accordion" multi="true">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Description
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+        {{ roleData.roleDetails?.description }}
+      </p>
+    </mat-expansion-panel>
 
-    <div *ngFor="let skillCategory of roleData.topSkills; let i = index" class="container" [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}" [ngStyle]="{'--circle-border-color': skillCategory.circleColor}">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Responsibilities
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li *ngFor="let responsibility of roleData.roleDetails?.responsibilities">
+          {{ responsibility }}
+        </li>
+      </ul>
+    </mat-expansion-panel>
 
-      <h4 class="category-header" [ngStyle]="{'background-color': skillCategory.headerColor}">
-        {{ skillCategory.category }}
-      </h4>
-      <div class="content">
-        <ul>
-          <li *ngFor="let skill of skillCategory.skills">
-            {{ skill.skillName }}
-          </li>
-        </ul>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Skills
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li *ngFor="let skill of roleData.roleDetails?.skills">
+          {{ skill }}
+        </li>
+      </ul>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Who Fits Well
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+        {{ roleData.roleDetails?.fitsWell }}
+      </p>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Roadmap
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="roadmap-section">
+        <div *ngIf="roleData" class="timeline">
+          <div *ngFor="let skillCategory of roleData.topSkills; let i = index" class="container" [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}" [ngStyle]="{'--circle-border-color': skillCategory.circleColor}">
+            <h4 class="category-header" [ngStyle]="{'background-color': skillCategory.headerColor}">
+              {{ skillCategory.category }}
+            </h4>
+            <div class="content">
+              <ul>
+                <li *ngFor="let skill of skillCategory.skills">
+                  {{ skill.skillName }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-  </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
