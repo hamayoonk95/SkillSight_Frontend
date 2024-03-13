@@ -1,6 +1,6 @@
 // Angular core imports
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 // RxJS import
 import { Observable } from 'rxjs';
@@ -30,8 +30,17 @@ export class JobInfoService {
    * @param roleId - The ID of the role for which to fetch job information.
    * @returns An Observable containing the job information.
    */
-  getJobInfo(roleId: number): Observable<JobInfo> {
-    const url = `${this.apiUrl}/${roleId}/jobInfo`;
-    return this.http.get<JobInfo>(url);
+  getJobInfo(
+    roleId: number,
+    startDate: Date,
+    endDate: Date
+  ): Observable<JobInfo> {
+    const params = new HttpParams()
+      .set('startDate', startDate.toISOString())
+      .set('endDate', endDate.toISOString());
+
+    return this.http.get<JobInfo>(`${this.apiUrl}/${roleId}/jobInfo`, {
+      params,
+    });
   }
 }

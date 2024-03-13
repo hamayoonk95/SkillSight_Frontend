@@ -1,6 +1,6 @@
 // Angular core imports
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 // RxJS import
 import { Observable } from 'rxjs';
@@ -34,14 +34,30 @@ export class SkillsService {
   /**
    * Fetches skills data for a specific role and category.
    * @param roleId - The ID of the role for which to fetch skills data.
+   * @param startDate - The start date for filtering skills data.
+   * @param endDate - The end date for filtering skills data.
    * @param category - The category of skills to fetch.
    * @returns An Observable containing an array of SkillResponse.
    */
   getSkillsForRole(
     roleId: number,
-    category?: string | null
+    category?: string | null,
+    startDate?: Date,
+    endDate?: Date
   ): Observable<SkillResponse[]> {
-    const url = `${this.apiUrl}/${roleId}/skills/${category}`;
-    return this.http.get<SkillResponse[]>(url);
+    let params = new HttpParams();
+
+    // Only append startDate and endDate to the params if they are provided
+    if (startDate) {
+      params = params.append('startDate', startDate.toISOString());
+    }
+    if (endDate) {
+      params = params.append('endDate', endDate.toISOString());
+    }
+
+    return this.http.get<SkillResponse[]>(
+      `${this.apiUrl}/${roleId}/skills/${category}`,
+      { params }
+    );
   }
 }
