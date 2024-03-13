@@ -29,10 +29,42 @@ export class HomepageComponent {
   Category = Category;
   selectedRoleId: number | null; // Holds the selected role ID
   selectedRoleTitle: string | null; // Holds the selected role title
+  endDate = new Date();
+  startDate = new Date(
+    this.endDate.getFullYear(),
+    this.endDate.getMonth() - 3,
+    this.endDate.getDate()
+  );
+
+  disableNextPeriodButton = false;
 
   // Handles the event when a role is selected in the RoleSelectionComponent.
   onRoleSelected(roleData: Role): void {
     this.selectedRoleId = roleData.id;
     this.selectedRoleTitle = roleData.roleTitle;
+  }
+
+  // Shifts the period forward or backward by 3 months
+  adjustPeriod(months: number): void {
+    this.startDate = new Date(
+      this.startDate.getFullYear(),
+      this.startDate.getMonth() + months,
+      this.startDate.getDate()
+    );
+    this.endDate = new Date(
+      this.endDate.getFullYear(),
+      this.endDate.getMonth() + months,
+      this.endDate.getDate()
+    );
+
+    // Prevent going beyond the current date
+    if (this.endDate > new Date()) {
+      this.endDate = new Date();
+      this.startDate = new Date(
+        this.endDate.getFullYear(),
+        this.endDate.getMonth() - 3,
+        this.endDate.getDate()
+      );
+    }
   }
 }

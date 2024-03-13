@@ -28,6 +28,9 @@ import { Category } from '../../pages/homepage/category.enum';
 export class TrendingSkillsVisualisationComponent implements OnChanges {
   @Input() selectedRoleId: number | null = null; // Input for the selected role ID
   @Input() category: CategoryColorKey = null; // Input for the selected category
+  @Input() startDate: Date;
+  @Input() endDate: Date;
+
   public barChartData: ChartDataset[] = [
     { data: [], label: '', backgroundColor: [] },
   ];
@@ -62,38 +65,53 @@ export class TrendingSkillsVisualisationComponent implements OnChanges {
   // Fetch and process skill data on input changes
   ngOnChanges(changes: SimpleChanges): void {
     // Check if both category and selectedRoleId are valid
-    if (this.category && this.selectedRoleId) {
+    if (
+      changes['category'] ||
+      changes['selectedRoleId'] ||
+      changes['startDate'] ||
+      changes['endDate']
+    ) {
       // Fetch skills data for the selected role and category
-      this.SkillsService.getSkillsForRole(
-        this.selectedRoleId,
-        this.category
-      ).subscribe(
-        (responses: SkillResponse[]) => {
-          // Set the bar chart labels to skill names with the first letter capitalised
-          this.barChartLabels = responses.map(
-            (response: SkillResponse) =>
-              response.skill.skillName.charAt(0).toUpperCase() +
-              response.skill.skillName.slice(1)
-          );
-
-          // Set the bar chart data to the frequency of each skill
-          this.barChartData[0].data = responses.map(
-            (response) => response.frequency
-          );
-
-          // Set the background color for each data point in the bar chart
-          this.barChartData[0].backgroundColor = this.barChartLabels.map(
-            () => categoryColors[this.category] || '#CCCCCC'
-          );
-        },
-        (error) => {
-          console.error('Error retrieving skills data:', error);
-        }
-      );
+      this.fetchSkillsData();
     }
   }
 
-   getPluralCategory(category: CategoryColorKey): string {
+  fetchSkillsData(): void {
+    // Clear existing data to ensure the component refreshes its visualization
+    this.barChartData = [{ data: [], label: '', backgroundColor: [] }];
+    this.barChartLabels = [];
+
+    this.SkillsService.getSkillsForRole(
+      this.selectedRoleId,
+      this.category,
+      this.startDate,
+      this.endDate
+    ).subscribe(
+      (responses: SkillResponse[]) => {
+        // Set the bar chart labels to skill names with the first letter capitalised
+        this.barChartLabels = responses.map(
+          (response: SkillResponse) =>
+            response.skill.skillName.charAt(0).toUpperCase() +
+            response.skill.skillName.slice(1)
+        );
+
+        // Set the bar chart data to the frequency of each skill
+        this.barChartData[0].data = responses.map(
+          (response) => response.frequency
+        );
+
+        // Set the background color for each data point in the bar chart
+        this.barChartData[0].backgroundColor = this.barChartLabels.map(
+          () => categoryColors[this.category] || '#CCCCCC'
+        );
+      },
+      (error) => {
+        console.error('Error retrieving skills data:', error);
+      }
+    );
+  }
+
+  getPluralCategory(category: CategoryColorKey): string {
     const plurals = {
       [Category.Language]: 'Languages',
       [Category.Library]: 'Libraries',
