@@ -6,7 +6,7 @@
 :root {
   --primary-color: #333940;
   --primary-color-rgb: rgb(31, 39, 71);
-  --secondary-color: #ffcc33;
+  --secondary-color: #ee8433;
   --accent-color: #4a90e2;
   --background-color: #f5f5f5;
   --background-secondary: #e0e0e0;
@@ -27,7 +27,7 @@
 /* Global Body Styles */
 body {
   font-family: "Roboto", sans-serif;
-  background-image: url("./assets/background.svg");
+  background-image: url("./assets/bgIMG.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

@@ -26,8 +26,9 @@ import { SkillFormComponent } from '../../components/skill-form/skill-form.compo
 })
 export class SkillGapComponent {
   selectedRole: Role | null = null; // Holds the currently selected role
-  skillsForSelectedRole : SkillsByCategory = {}; // Stores skills data for the selected role, categorized by type
-  allSkillsLoaded : boolean = false; // Flag to indicate if all skills data has been loaded
+  skillsForSelectedRole: SkillsByCategory = {}; // Stores skills data for the selected role, categorized by type
+  allSkillsLoaded: boolean = false; // Flag to indicate if all skills data has been loaded
+  showSkillFormFlag: boolean = false;
 
   // Predefined categories of skills
   categories: string[] = [
@@ -57,8 +58,8 @@ export class SkillGapComponent {
    * Resets the skill form and indicates that skills are not loaded.
    */
   resetSkillForm(): void {
-    this.skillsForSelectedRole = {}; 
-    this.allSkillsLoaded = false; 
+    this.skillsForSelectedRole = {};
+    this.allSkillsLoaded = false;
   }
 
   /**
@@ -85,5 +86,9 @@ export class SkillGapComponent {
         },
       });
     });
+  }
+
+  showSkillForm() {
+    this.showSkillFormFlag = true;
   }
 }

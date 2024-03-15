@@ -1,3 +1,8 @@
+.skill-form-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
 /* Skill Select Container Styling */
 .skill-select-container {
   margin-top: 0.5rem;
