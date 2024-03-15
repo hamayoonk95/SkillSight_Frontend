@@ -24,8 +24,6 @@ export class RoleRoadmapComponent implements OnInit {
   colors: string[] = ['#FF5733', '#CDDC39', '#9C27B0', '#00BCD4', '#FFC107'];
 
   ngOnInit(): void {
-    console.log(this.roleData);
-
     if (this.roleData && this.roleData.topSkills) {
       this.roleData.topSkills.forEach((skillCategory: any, index: number) => {
         const colorIndex = index % this.colors.length;

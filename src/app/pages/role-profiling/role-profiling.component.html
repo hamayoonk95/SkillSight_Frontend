@@ -1,1 +1,11 @@
-<app-questionnaire *ngIf="!matchedRoleData"></app-questionnaire>
+<div class="role-profiler-component" *ngIf="!showQuestionnaireFlag; else roleMatchedTemplate">
+  <div class="role-profiler-intro">
+    <h1>Welcome to the Role Profiler</h1>
+    <p>Let's find out which tech role is a perfect match for you. Answer a few questions to get started!</p>
+    <button mat-button matStepperNext class="next-btn" (click)="showQuestionnaire()">Next</button>
+  </div>
+</div>
+
+<ng-template #roleMatchedTemplate>
+  <app-questionnaire *ngIf="!matchedRoleData"></app-questionnaire>
+</ng-template>

@@ -23,7 +23,7 @@
             </mat-progress-bar>
             <!-- Text Displaying Number of Known Skills -->
             <span class="progress-text">
-              {{ stat.knownSkills }}/
+              {{ stat.knownSkills }} /
               {{ stat.totalSkills }}</span>
           </div>
         </div>
@@ -38,7 +38,9 @@
           <mat-chip-set>
             <ng-container *ngFor="let skill of skillsForSelectedRole[stat.categoryName]">
               <mat-chip *ngIf="!isSkillMissing(stat, skill)" selectable="false" class="known-skill">
-                {{ skill.skill.skillName }}
+                <a [href]="'https://www.google.com/search?q=' + skill.skill.skillName + '+best+learning+resource'" target="_blank">
+                  {{ skill.skill.skillName }}
+                </a>
               </mat-chip>
             </ng-container>
           </mat-chip-set>
@@ -53,7 +55,9 @@
           <mat-chip-set>
             <ng-container *ngFor="let skill of skillsForSelectedRole[stat.categoryName]">
               <mat-chip *ngIf="isSkillMissing(stat, skill)" selectable="false" class="missing-skill">
-                {{ skill.skill.skillName }}
+                <a [href]="'https://www.google.com/search?q=' + skill.skill.skillName + '+best+learning+resource'" target="_blank">
+                  {{ skill.skill.skillName }}
+                </a>
               </mat-chip>
             </ng-container>
           </mat-chip-set>

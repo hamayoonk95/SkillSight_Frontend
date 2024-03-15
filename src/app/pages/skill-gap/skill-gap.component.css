@@ -1,15 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
 .skill-gap-component {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.skill-gap-component app-role-selection {
-  margin-top: 2rem;
-}
-
-.skill-gap-component app-skill-form {
-  width: 90%;
-  margin: 1rem auto;
+.skill-gap-intro {
+  margin-top: -10rem;
+  width: 75%;
+  text-align: center;
 }

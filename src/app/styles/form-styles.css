@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+mat-horizontal-stepper {
+  border-radius: 10px;
+}
+
 /* Stepper Container Styles */
 .stepper-container {
   width: 100%;

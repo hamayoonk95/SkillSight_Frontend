@@ -70,6 +70,12 @@
   background-color: var(--warning-color) !important;
 }
 
+.known-skill a,
+.missing-skill a {
+  text-decoration: none;
+  color: var(--white-color);
+}
+
 /* Skill Chip Text Color */
 .known-skill span,
 .missing-skill span {

@@ -1,0 +1,139 @@
+.about-page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  font-family: "Arial", sans-serif;
+}
+
+/* Banner Section */
+.about-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  width: 100%;
+  background-image: url("../../../assets/visualisation.jpg");
+  background-size: cover;
+  color: white;
+  text-align: center;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.about-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.about-banner h1,
+.about-banner p {
+  position: relative;
+  z-index: 2;
+}
+
+.about-banner h1 {
+  font-size: 2.5rem;
+}
+
+.about-banner p {
+  font-size: 1.2rem;
+}
+
+.about-content {
+  width: 80%;
+}
+
+.about-content img {
+  border-radius: 20px;
+}
+
+.about-content p {
+  font-size: 1rem;
+}
+
+.about-content li,
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mission-statement {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 3rem 0;
+  gap: 2rem;
+}
+
+.mission-image {
+  flex-basis: 40%;
+}
+
+.mission-image img {
+  width: 100%;
+  height: auto;
+}
+
+.features-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 3rem 0;
+  gap: 2rem;
+}
+
+.features-section {
+  flex-direction: row-reverse;
+}
+
+.features-content {
+  flex-basis: 50%;
+}
+
+.features-image {
+  flex-basis: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.features-image img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .features-section,
+  .mission-statement {
+    flex-direction: column;
+  }
+
+  .features-content,
+  .mission-content,
+  .features-image,
+  .mission-image {
+    flex-basis: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .features-content {
+    order: 1;
+  }
+
+  .features-image {
+    order: 2;
+    justify-content: center;
+  }
+}

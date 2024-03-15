@@ -1,6 +1,7 @@
 // Angular Core imports
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 // Importing child components
 import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
@@ -15,12 +16,13 @@ import { MatchedRoleData } from '../../services/role-match-service/role-profilin
 @Component({
   selector: 'app-role-profiling',
   standalone: true,
-  imports: [CommonModule, QuestionnaireComponent],
+  imports: [CommonModule, QuestionnaireComponent, MatButtonModule],
   templateUrl: './role-profiling.component.html',
   styleUrl: './role-profiling.component.css',
 })
 export class RoleProfilingComponent {
   matchedRoleData: MatchedRoleData; // Holds the data for the matched role
+  showQuestionnaireFlag = false;
 
   /**
    * Handles the event when a role is matched from the questionnaire component.
@@ -28,5 +30,9 @@ export class RoleProfilingComponent {
    */
   onRoleMatched(matchedRole: MatchedRoleData) {
     this.matchedRoleData = matchedRole; // Assings the matched role data for displaying in role roadmap
+  }
+
+  showQuestionnaire() {
+    this.showQuestionnaireFlag = true;
   }
 }

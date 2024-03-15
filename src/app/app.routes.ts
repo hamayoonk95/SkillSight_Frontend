@@ -11,13 +11,17 @@ import { RoleRoadmapComponent } from './components/role-roadmap/role-roadmap.com
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-  { path: 'skill-gap', component: SkillGapComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'skill-gap', component: SkillGapComponent, canActivate: [AuthGuard] },
   {
     path: 'skill-gap-visualisation',
     component: SkillGapVisualisationComponent,
   },
-  { path: 'role-profiler', component: RoleProfilingComponent },
+  {
+    path: 'role-profiler',
+    component: RoleProfilingComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'role-roadmap', component: RoleRoadmapComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },

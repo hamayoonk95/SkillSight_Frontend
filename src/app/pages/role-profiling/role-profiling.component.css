@@ -1,9 +1,29 @@
 :host {
-  height: 100%;
-  width: 100%;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  margin: auto;
   justify-content: center;
-  align-items: center; */
+  flex-grow: 1;
+}
+
+.role-profiler-component {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.role-profiler-intro {
+  margin-top: -10rem;
+  width: 75%;
+  text-align: center;
+}
+
+.next-btn {
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+  background-color: var(--button-next-bg-color);
+}
+
+.next-btn:hover {
+  background-color: var(--button-next-bg-hover);
 }

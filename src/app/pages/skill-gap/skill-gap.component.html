@@ -1,9 +1,15 @@
-<div class="skill-gap-component">
+<div class="skill-gap-component" *ngIf="!selectedRole; else skillGapAnalysisTemplate">
+  <div class="skill-gap-intro">
+    <h1>Bridge Your Skills Gap</h1>
+    <p>Identify the skills you need to master to advance in your tech career. Compare your skills against industry benchmarks.</p>
+  </div>
 
   <!-- Role selection component to choose a role -->
   <app-role-selection (roleSelected)="onRoleSelected($event)"></app-role-selection>
 
+</div>
+
+<ng-template #skillGapAnalysisTemplate>
   <!-- Skill Form Component - Passes the loaded skills data to the Skill Form Component -->
   <app-skill-form *ngIf="allSkillsLoaded" [skillsForSelectedRole]="skillsForSelectedRole"></app-skill-form>
-
-</div>
+</ng-template>
