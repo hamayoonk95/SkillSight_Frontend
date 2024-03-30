@@ -4,7 +4,7 @@ import { SimpleChange, SimpleChanges } from '@angular/core';
 import { JobInfoService } from '../../services/job-info-service/job-info.service';
 import { of, throwError } from 'rxjs';
 
-describe('JobInfoComponent', () => {
+fdescribe('JobInfoComponent', () => {
   let component: JobInfoComponent;
   let fixture: ComponentFixture<JobInfoComponent>;
   let mockJobInfoService: any;

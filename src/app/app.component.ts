@@ -1,7 +1,8 @@
 // Angular core imports
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { WarmUpService } from './services/warmup-service/warmup.service';
 
 // Navbar component import
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,6 +19,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   styleUrl: './app.component.css',
   imports: [CommonModule, RouterOutlet, NavbarComponent],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'skillsight';
+  constructor(private warmUpService: WarmUpService) {}
+
+  ngOnInit(): void {
+    this.warmUpService.warmUpBackend().subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.error('Error', error),
+    });
+  }
 }
