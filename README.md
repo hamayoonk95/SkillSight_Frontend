@@ -13,15 +13,15 @@ The SkillSight frontend provides a dynamic and responsive user interface for int
 
 1. Clone the repository to your local machine.
 2. Open a terminal or command prompt and navigate to the frontend directory:
-   cd skillsight_frontend
+   `cd skillsight_frontend`
 
-Copy code 3. Install dependencies with npm:
-npm install
+3. Install dependencies with npm:
+   `npm install`
 
-Copy code 4. Start the Angular development server:
-ng serve
+4. Start the Angular development server:
+   `ng serve`
 
-Copy code 5. Open your web browser and navigate to `http://localhost:4200` to view the application.
+5. Open your web browser and navigate to `http://localhost:4200` to view the application.
 
 ## Configuration
 
